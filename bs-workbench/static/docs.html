@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HSJ 接口文档与调试</title>
+  <link rel="stylesheet" href="/vendor/swagger-ui/swagger-ui.css">
+  <link rel="stylesheet" href="/docs.css">
+  <script src="/vendor/swagger-ui/swagger-ui-bundle.js" defer></script>
+  <script src="/docs.js" defer></script>
+</head>
+<body>
+  <header class="docs-header">
+    <a href="/desktop">返回分析工作台</a>
+    <h1>接口文档与调试</h1>
+    <button id="docs-session" type="button">刷新本机会话</button>
+    <output id="docs-status" role="status" aria-live="polite">正在连接本机服务…</output>
+  </header>
+  <section class="docs-guide" aria-label="使用说明">
+    <p id="docs-inventory" role="status">正在核对接口目录…</p>
+    <p>展开接口 → 点击 <b>Try it out</b> → 填写参数 → 点击 <b>Execute</b> 执行。页面会自动连接当前本机会话，也可通过 <b>Authorize</b> 手动填写令牌。</p>
+    <p>先用 <b>文件 → 读取会话和文件列表</b> 查看文件 ID，再用 <b>读取文件与工况通道信息</b> 查询索引；工况和通道都从 0 开始。示例中的 file_id 可替换为你的文件 ID。</p>
+    <p>这里调用实际接口：分析会执行计算，导入和导出会生成文件。<a href="/api/schema" target="_blank" rel="noopener">查看 OpenAPI 定义</a></p>
+    <ol><li>数据分析：<code>bootstrap → open → analyze</code>；固定时段请显式设置 <code>full_period:false</code>。</li><li>游标与细节：把分析结果的 <code>analysis_id</code> 填入 <code>chart</code>。服务重启或缓存释放后须重新分析。</li><li>专项分析：展开 <code>/api/special</code>，在 Examples 中切换11种模块；Schema 按 module 显示独立参数。</li><li>批量导出：<code>batch / special-batch → status → download</code>；逐文件下载再调用 <code>export-file-list → export-file</code>，不要把任务ID和文件ID混用。</li><li>上传使用原文件二进制，CHD须提供采样率；XLS/DOC需要本机Office。调用 <code>shutdown</code> 会停止服务，放在其他调用之后。</li></ol>
+  </section>
+  <main id="swagger-ui"></main>
+  <noscript>请启用 JavaScript 后使用接口调试页面。</noscript>
+</body>
+</html>

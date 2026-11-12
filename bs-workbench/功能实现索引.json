@@ -1,0 +1,752 @@
+{
+  "version": "0.17-orbit-classic-layout",
+  "date": "2026-11-10",
+  "basis": "frontend-review/功能保留清单.md；功能入口与源码证据.md",
+  "testing": "未运行测试，待用户验收",
+  "features": [
+    {
+      "id": "F-01",
+      "name": "打开分拣数据文件，选择并取消打开",
+      "implementation": [
+        "static/app.js:openFile/upload/acceptFile",
+        "static/index.html:#import/#file/#sample"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-02",
+      "name": "文件属性和文件列表切换",
+      "implementation": [
+        "sel_reader.py:metadata",
+        "analysis_service.py:file_info",
+        "static/properties.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-03",
+      "name": "数据树层级展开、工况/通道选择和双击打开图表",
+      "implementation": [
+        "static/classic.js:classicTree",
+        "static/files-workspace.js",
+        "static/desktop-client.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-04",
+      "name": "数据树右键批量操作",
+      "implementation": [
+        "static/workspace.js:openBatchFromTree",
+        "static/exports.js:makeBatchSelection/parseCon"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-05",
+      "name": "加载外部 CHD 数据做 FFT",
+      "implementation": [
+        "static/exports.js:setupExports",
+        "api.py:upload_chd",
+        "data_reader.py:ChdFile"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-06",
+      "name": "保存运行日志",
+      "implementation": [
+        "static/exports.js:logAction/#log-save",
+        "static/workspace.js:消息输出/保存日志"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-07",
+      "name": "刷新与全部关闭",
+      "implementation": [
+        "static/desktop.js:close/draw/#refresh/#close-all",
+        "api.py:shutdown"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-08",
+      "name": "显示/隐藏导航、消息输出、状态栏和工具栏组",
+      "implementation": [
+        "static/workspace.js:apply/setup/工具栏组",
+        "static/workspace.css"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-09",
+      "name": "多视图切换、窗口大小调整、关闭与退出",
+      "implementation": [
+        "static/desktop.js:open/activate/close",
+        "static/desktop-client.js",
+        "static/desktop.css"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "F-10",
+      "name": "外观主题及标签颜色选项",
+      "implementation": [
+        "static/workspace.js:preferences/theme",
+        "static/workspace.css",
+        "static/desktop.js:#color"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-01",
+      "name": "波形、频谱、波形频谱三种显示模式",
+      "implementation": [
+        "static/app.js:#display-mode",
+        "static/classic.js:setGraphMode"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-02",
+      "name": "波形 X/Y/XY 放大、XY 平移、撤销、重绘",
+      "implementation": [
+        "static/charts.js:Chart",
+        "static/page.js:scheduleViewAnalysis"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-03",
+      "name": "波形浮动点、临近点游标",
+      "implementation": [
+        "static/charts.js:Chart/setMode",
+        "interaction.py:read_chart"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-04",
+      "name": "频谱 X/XY 放大、X 平移、临近点、撤销和重绘",
+      "implementation": [
+        "static/charts.js:Chart",
+        "interaction.py:read_chart"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-05",
+      "name": "波形统计和频谱结果显示",
+      "implementation": [
+        "analysis.py:analyze",
+        "static/app.js:runAnalysis/fillDL",
+        "static/classic.js:syncClassic"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-06",
+      "name": "峰峰值置信度 95% / 97% / 100%",
+      "implementation": [
+        "analysis.py:confidence_pp",
+        "static/app.js:#confidence"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-07",
+      "name": "标题修改",
+      "implementation": [
+        "static/app.js:#title-form",
+        "analysis_service.py:execute"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-08",
+      "name": "两类标注入口、取消标注、标注位置激活模式",
+      "implementation": [
+        "static/charts.js:setupChartInteractions/Chart",
+        "static/page.js:#throw-form",
+        "interaction.py:annotation_records"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-09",
+      "name": "整周期 FFT 开关、键相显示及图表联动",
+      "implementation": [
+        "sel_reader.py:key_phase_points",
+        "analysis.py:analyze",
+        "static/page.js:#key-visible/#auto-view"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-10",
+      "name": "非等周期 FFT 分析时段",
+      "implementation": [
+        "static/page.js:openSpan/#span-form",
+        "analysis.py:analyze"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-11",
+      "name": "添加通道数据及颜色",
+      "implementation": [
+        "static/channels.js",
+        "overlays.py:read_overlays"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-12",
+      "name": "添加移动趋势",
+      "implementation": [
+        "static/trends.js",
+        "moving_trend.py:create_trend"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-13",
+      "name": "波形滤波、恢复原始数据",
+      "implementation": [
+        "analysis.py:filter_signal",
+        "static/app.js:#filter-form/#filter-undo/#filter-restore"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "W-14",
+      "name": "甩负荷分析窗口相关设置",
+      "implementation": [
+        "static/page.js:#throw-form",
+        "throwload.py:compute_throw"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-01",
+      "name": "保存波形图、全图、自定义图像",
+      "implementation": [
+        "static/exports.js:imageCanvas/validateImageSize",
+        "static/output-extra.js",
+        "outputs.py:plot_image/image_bytes"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-02",
+      "name": "保存全时段波形、当前时段波形、频谱数据",
+      "implementation": [
+        "static/app.js:download",
+        "analysis_service.py:process_analysis",
+        "outputs.py:legacy_data"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-03",
+      "name": "单通道 Word 与 Excel 报表",
+      "implementation": [
+        "outputs.py:excel_report/word_report",
+        "office_legacy.py:convert",
+        "Convert-Office.ps1"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-04",
+      "name": "批量保存图像",
+      "implementation": [
+        "export_jobs.py:ExportJobs",
+        "static/exports.js:#batch-form",
+        "static/wave-batch-extra.js",
+        "static/save-target.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-05",
+      "name": "批量保存通道数据",
+      "implementation": [
+        "export_jobs.py:ExportJobs",
+        "outputs.py:legacy_data",
+        "export_files.py"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-06",
+      "name": "批量汇总 Excel",
+      "implementation": [
+        "export_jobs.py:ExportJobs",
+        "outputs.py:excel_report",
+        "office_legacy.py"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-07",
+      "name": "批量汇总 Word",
+      "implementation": [
+        "export_jobs.py:ExportJobs",
+        "outputs.py:word_report",
+        "office_legacy.py"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "E-08",
+      "name": "选择列表的鼠标/键盘勾选、分类操作",
+      "implementation": [
+        "static/exports.js:makeBatchSelection/#batch-all/#batch-none/#batch-invert"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-01",
+      "name": "创建长图和初始参数",
+      "implementation": [
+        "static/strip.html:#create-form",
+        "static/strip.js:validate/commit"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-02",
+      "name": "图区设置与添加信号/分组",
+      "implementation": [
+        "static/strip.js:commit/renderTree",
+        "strip_chart.py:prepare_strip"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-03",
+      "name": "标题区右键设置标题",
+      "implementation": [
+        "static/strip.js:图表标题区右键/#title-form"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-04",
+      "name": "X 轴区域右键设置时间和网格列数",
+      "implementation": [
+        "static/strip.js:时间轴右键/#time-form",
+        "strip_chart.py:prepare_strip"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-05",
+      "name": "坐标区右键修改波形与坐标信息、删除信号",
+      "implementation": [
+        "static/strip.js:纵轴区右键/信号编辑/删除",
+        "static/strip.html"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-06",
+      "name": "分组树内右键添加分组/信号",
+      "implementation": [
+        "static/strip.js:分组树右键",
+        "static/strip.html:#group-tree"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "L-07",
+      "name": "鼠标操作、滚动和图像保存",
+      "implementation": [
+        "static/strip.js:cancelDrag/exportImage/saveBlob",
+        "static/save-target.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "D-01",
+      "name": "新建三维频谱和三维波形瀑布图",
+      "implementation": [
+        "waterfall.py:prepare_waterfall",
+        "static/waterfall.js:#create-form"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "D-02",
+      "name": "参数预览图双击交互",
+      "implementation": [
+        "static/waterfall.js:preview/drawPreview/#preview"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "D-03",
+      "name": "坐标轴范围、标题、字体/颜色、曲线显隐",
+      "implementation": [
+        "static/waterfall.js:axisDialog/fontDialog/curveDialog/#title-form"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "D-04",
+      "name": "三维图鼠标交互与右键菜单",
+      "implementation": [
+        "static/waterfall.js:render/draw/指针及右键事件"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "D-05",
+      "name": "当前及批量保存三维图",
+      "implementation": [
+        "static/waterfall.js:image/zip/#batch-form",
+        "static/save-target.js:hsjSaveFiles"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "A-01",
+      "name": "新建轴心轨迹，选择 X/Y 信号",
+      "implementation": [
+        "static/specialty.js",
+        "static/specialty-extra.js",
+        "static/orbit-layout.js",
+        "static/orbit-layout.css",
+        "specialty.py:pair/orbit_filter"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "A-02",
+      "name": "轴心轨迹撤销、重绘、X/Y 放大和标题",
+      "implementation": [
+        "static/specialty.js",
+        "static/specialty-extra.js",
+        "static/orbit-layout.js",
+        "static/orbit-layout.css",
+        "specialty.py:pair/orbit_filter"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "A-03",
+      "name": "X/Y 分别滤波、恢复和保存图像",
+      "implementation": [
+        "static/specialty.js",
+        "static/specialty-extra.js",
+        "static/orbit-layout.js",
+        "static/orbit-layout.css",
+        "specialty.py:pair/orbit_filter"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "C-01",
+      "name": "新建相关分析、标题与图像输出",
+      "implementation": [
+        "specialty.py:pair",
+        "static/specialty.js:fieldSpecs.correlation/composite"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "C-02",
+      "name": "相关分析 X/Y 各自撤销与重绘",
+      "implementation": [
+        "static/specialty.js:Plot.recompute",
+        "specialty.py:pair/selection_units"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "T-01",
+      "name": "创建趋势分析及参数选择",
+      "implementation": [
+        "specialty.py:trend",
+        "static/specialty.js:fieldSpecs.trend"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "T-02",
+      "name": "平均/中间/有效/峰峰值切换",
+      "implementation": [
+        "analysis.py:confidence_pp",
+        "specialty.py:trend",
+        "static/specialty.js:#legend"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "T-03",
+      "name": "趋势图标题、坐标范围与颜色",
+      "implementation": [
+        "static/specialty.js:action/range/title/#legend",
+        "static/specialty-extra.js:persist"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "T-04",
+      "name": "当前/批量趋势图、Excel 趋势报表",
+      "implementation": [
+        "special_jobs.py:SpecialtyJobs",
+        "special_reports.py:workbook/word_report",
+        "static/specialty-extra.js:batchState/poll"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "B-01",
+      "name": "新建动平衡分析和加载配重前/试配重数据",
+      "implementation": [
+        "static/balance.html",
+        "static/balance.js",
+        "static/balance.css",
+        "specialty.py:balance_preview/balance_sample/balance/balance_decompose"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "B-02",
+      "name": "配重前/后数据分析、周期选择及取消",
+      "implementation": [
+        "static/balance.html",
+        "static/balance.js",
+        "static/balance.css",
+        "specialty.py:balance_preview/balance_sample/balance/balance_decompose"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "B-03",
+      "name": "动平衡视图的试重块、配重块、旋转、配重分解及保存",
+      "implementation": [
+        "static/balance.html",
+        "static/balance.js",
+        "static/balance.css",
+        "specialty.py:balance_preview/balance_sample/balance/balance_decompose"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "B-04",
+      "name": "独立动平衡计算与分解计算",
+      "implementation": [
+        "static/balance.html",
+        "static/balance.js",
+        "static/balance.css",
+        "specialty.py:balance_preview/balance_sample/balance/balance_decompose"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "J-01",
+      "name": "创建盘车试验及多通道配置",
+      "implementation": [
+        "static/specialty-extra.js:jigger独立分组",
+        "static/specialty.js:jiggerChannels/condition_2"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "J-02",
+      "name": "加载通道/外部 JGR，执行计算",
+      "implementation": [
+        "specialty.py:jigger",
+        "static/specialty.js:editSourceTable/#external-file"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "J-03",
+      "name": "盘车数据、视图保存和右键菜单",
+      "implementation": [
+        "static/specialty.js:raw/composite/图表右键",
+        "static/save-target.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "O-01",
+      "name": "效率分析：物理参数、水头、有功和流量设置",
+      "implementation": [
+        "specialty.py:efficiency",
+        "static/specialty.js:numbers.efficiency/requiredField"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "O-02",
+      "name": "效率分析传感器/通道选择与结果导出",
+      "implementation": [
+        "static/specialty.js:fieldSpecs.efficiency",
+        "special_reports.py:workbook/word_report"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "O-03",
+      "name": "协联工况 ICA 文件加载、曲线与数据/图像输出",
+      "implementation": [
+        "cam_legacy.py:compute",
+        "native/cam_math.cpp",
+        "static/specialty-extra.js:legacy-data",
+        "api.py:special_legacy"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "O-04",
+      "name": "最小二乘圆度拟合 IAG 文件、计算与存储",
+      "implementation": [
+        "specialty.py:airgap",
+        "static/specialty.js:editSourceTable",
+        "api.py:special_legacy"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "K-01",
+      "name": "分类勾选列表",
+      "implementation": [
+        "static/exports.js:makeBatchSelection",
+        "static/specialty.js:#batch-channels"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "K-02",
+      "name": "可编辑报表列表",
+      "implementation": [
+        "static/specialty.js:editSourceTable",
+        "static/balance-grid.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "K-03",
+      "name": "菜单助记键",
+      "implementation": [
+        "static/workspace.js:Alt菜单事件",
+        "static/desktop-client.js"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "K-04",
+      "name": "默认对话框键盘操作",
+      "implementation": [
+        "static/charts.js:setupChartInteractions",
+        "static/specialty.js:dialog/cancel",
+        "static/waterfall.js:dialog/cancel"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "K-05",
+      "name": "图表事件、图中右键和鼠标命中",
+      "implementation": [
+        "static/charts.js:Chart",
+        "static/strip.js",
+        "static/waterfall.js",
+        "static/specialty.js:Plot"
+      ],
+      "tested": false,
+      "accepted": false
+    },
+    {
+      "id": "K-06",
+      "name": "按钮状态和命令路由",
+      "implementation": [
+        "static/app.js:busy",
+        "static/specialty.js:sync/setBusy",
+        "static/specialty-extra.js:sync",
+        "static/waterfall.js:syncCreation/busy",
+        "static/desktop.js:activate"
+      ],
+      "tested": false,
+      "accepted": false
+    }
+  ],
+  "legacy_exclusions": {
+    "ID_UserHelp": "原处理函数为空且资源INACTIVE，不把历史占位声称为可用手册",
+    "ID_CoherentUnZoom/ID_CoherentReset": "原泛化绑定被注释，保留证据；使用原有效X/Y专用撤销重绘",
+    "ID_FILE_NEW/ID_FILE_OPEN": "原CWinApp内部候选，缺少可达性证据；不当作新增业务能力承诺"
+  }
+}

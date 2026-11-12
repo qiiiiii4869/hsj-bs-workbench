@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-07",
+  "changed_source_resources": [
+    "CustomTreeCtrl.cpp",
+    "CustomTreeCtrl.h",
+    "MainFrm.cpp",
+    "niwavefraqview.cpp",
+    "NiWaveFraqView.h",
+    "OutputView.cpp",
+    "resource.h",
+    "ScanAnalysis.rc",
+    "WorkSpaceBar.cpp",
+    "res/bmp00001.bmp",
+    "res/bmp00002.bmp",
+    "res/bmp00003.bmp",
+    "res/bmp00004.bmp",
+    "res/bmp00005.bmp",
+    "res/bmp00006.bmp",
+    "res/bmp00007.bmp",
+    "res/bmp00008.bmp",
+    "res/bmp00009.bmp",
+    "res/mainfram.bmp",
+    "res/Toolbar.bmp",
+    "res/toolbar1.bmp",
+    "res/toolbar2.bmp"
+  ],
+  "added_source_resources": [
+    "HSJAppearance.h"
+  ],
+  "layout_files_changed": false,
+  "build": "Release Win32 compilation/resources/link/manifest passed",
+  "runtime_testing": "Not performed, per user instruction",
+  "preview": "C:\\Users\\Administrator\\Desktop\\HSJ2010-Analysis-Dev-20261031-221311\\build-analysis\\out\\Skin-Preview\\ScanAnalysis.exe",
+  "backup": "C:\\Users\\Administrator\\Desktop\\HSJ2010-Analysis-Dev-20261031-221311\\frontend-review\\skin-backup-20261107\\source-before-skin.zip"
+}

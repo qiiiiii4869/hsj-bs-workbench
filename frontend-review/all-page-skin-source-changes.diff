@@ -1,0 +1,2452 @@
+--- first-page/3DFreqShowCurveDlg.cpp
++++ all-pages/3DFreqShowCurveDlg.cpp
+@@ -8,10 +8,10 @@
+ 
+ // C3DFreqShowCurveDlg 对话框
+ 
+-IMPLEMENT_DYNAMIC(C3DFreqShowCurveDlg, CDialog)
++IMPLEMENT_DYNAMIC(C3DFreqShowCurveDlg, CHSJDialog)
+ 
+ C3DFreqShowCurveDlg::C3DFreqShowCurveDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(C3DFreqShowCurveDlg::IDD, pParent)
++	: CHSJDialog(C3DFreqShowCurveDlg::IDD, pParent)
+ {
+ 
+ 	m_pWnd = NULL;
+@@ -24,12 +24,12 @@
+ 
+ void C3DFreqShowCurveDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_LSCCURVE, m_lscShowCurve);
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(C3DFreqShowCurveDlg, CDialog)
++BEGIN_MESSAGE_MAP(C3DFreqShowCurveDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &C3DFreqShowCurveDlg::OnBnClickedOk)
+ 	//ON_NOTIFY(NM_CLICK, IDC_LSCCURVE, &C3DFreqShowCurveDlg::OnClickListCurvename)
+ 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LSCCURVE, &C3DFreqShowCurveDlg::OnItemchangedListCurvename)
+@@ -47,7 +47,7 @@
+ 
+ BOOL C3DFreqShowCurveDlg::OnInitDialog() 
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	
+ 	// TODO: Add extra initialization here
+ 	m_lscShowCurve.SetExtendedStyle(  LVS_EX_CHECKBOXES| LVS_EX_FULLROWSELECT |LVS_EX_GRIDLINES);
+--- first-page/3DFreqShowCurveDlg.h
++++ all-pages/3DFreqShowCurveDlg.h
+@@ -9,7 +9,7 @@
+ 	bool    bVisible;
+ } ;
+ 
+-class C3DFreqShowCurveDlg : public CDialog
++class C3DFreqShowCurveDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(C3DFreqShowCurveDlg)
+ 
+--- first-page/AddChnData.cpp
++++ all-pages/AddChnData.cpp
+@@ -10,13 +10,13 @@
+ 
+ // CAddChnData 对话框
+ 
+-IMPLEMENT_DYNAMIC(CAddChnData, CDialog)
++IMPLEMENT_DYNAMIC(CAddChnData, CHSJDialog)
+ 
+ 
+ CNiWaveFraqView* wave;
+ 
+ CAddChnData::CAddChnData(CWnd* pParent /*=NULL*/)
+-	: CDialog(CAddChnData::IDD, pParent)
++	: CHSJDialog(CAddChnData::IDD, pParent)
+ 	/*, m_strRGB(_T(""))*/
+ 	, m_ParamStr(_T(""))
+ {
+@@ -31,7 +31,7 @@
+ 
+ void CAddChnData::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_COLOR_PICKER, m_ColorPicker);
+ 	DDX_Text(pDX, IDC_RGB, m_strRGB);
+ 	DDX_Text(pDX, IDC_PARAMSTC, m_ParamStr);
+@@ -39,7 +39,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CAddChnData, CDialog)
++BEGIN_MESSAGE_MAP(CAddChnData, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER, &CAddChnData::OnBnClickedColorPicker)
+ 	ON_BN_CLICKED(IDOK, &CAddChnData::OnBnClickedOk)
+ END_MESSAGE_MAP()
+@@ -61,7 +61,7 @@
+ 
+ BOOL CAddChnData::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/AddChnData.h
++++ all-pages/AddChnData.h
+@@ -4,7 +4,7 @@
+ 
+ // CAddChnData 对话框
+ 
+-class CAddChnData : public CDialog
++class CAddChnData : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CAddChnData)
+ 
+--- first-page/AddMobTrend.cpp
++++ all-pages/AddMobTrend.cpp
+@@ -9,10 +9,10 @@
+ // CAddMobTrend 对话框
+ extern CNiWaveFraqView* wave;
+ 
+-IMPLEMENT_DYNAMIC(CAddMobTrend, CDialog)
++IMPLEMENT_DYNAMIC(CAddMobTrend, CHSJDialog)
+ 
+ CAddMobTrend::CAddMobTrend(CWnd* pParent /*=NULL*/)
+-	: CDialog(CAddMobTrend::IDD, pParent)
++	: CHSJDialog(CAddMobTrend::IDD, pParent)
+ 	, m_winStep(10),m_winWidth(10),TrendType(1)
+ {
+ 	m_strRGB = _T("255, 0, 255");
+@@ -38,7 +38,7 @@
+ 
+ void CAddMobTrend::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_COLOR_PICKER, m_ColorPicker);
+ 	DDX_Text(pDX, IDC_RGB, m_strRGB);
+ 	DDX_Text(pDX, IDC_EDIT2, m_winStep);
+@@ -47,7 +47,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CAddMobTrend, CDialog)
++BEGIN_MESSAGE_MAP(CAddMobTrend, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CAddMobTrend::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER, &CAddMobTrend::OnBnClickedColorPicker)
+ 	ON_CBN_SELCHANGE(IDC_COMBO1, &CAddMobTrend::OnCbnSelchangeCombo1)
+@@ -66,7 +66,7 @@
+ 
+ BOOL CAddMobTrend::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/AddMobTrend.h
++++ all-pages/AddMobTrend.h
+@@ -4,7 +4,7 @@
+ 
+ // CAddMobTrend 对话框
+ 
+-class CAddMobTrend : public CDialog
++class CAddMobTrend : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CAddMobTrend)
+ 
+--- first-page/AirGap.cpp
++++ all-pages/AirGap.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CAirGap 对话框
+ 
+-IMPLEMENT_DYNAMIC(CAirGap, CDialog)
++IMPLEMENT_DYNAMIC(CAirGap, CHSJDialog)
+ 
+ CAirGap::CAirGap(CWnd* pParent /*=NULL*/)
+-	: CDialog(CAirGap::IDD, pParent)
++	: CHSJDialog(CAirGap::IDD, pParent)
+ {
+ 	m_x = 0.0;
+ 	m_y = 0.0;
+@@ -27,7 +27,7 @@
+ 
+ void CAirGap::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Text(pDX, IDC_X, m_x);
+ 	DDX_Text(pDX, IDC_Y, m_y);
+ 	DDX_Text(pDX, IDC_R, m_r);
+@@ -39,7 +39,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CAirGap, CDialog)
++BEGIN_MESSAGE_MAP(CAirGap, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &CAirGap::OnBnClickedButton1)
+ 	ON_BN_CLICKED(IDOK, &CAirGap::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_BUTTON2, &CAirGap::OnBnClickedButton2)
+@@ -300,7 +300,7 @@
+ 
+ BOOL CAirGap::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/AirGap.h
++++ all-pages/AirGap.h
+@@ -4,7 +4,7 @@
+ 
+ // CAirGap 对话框
+ #define MAXPOINTS 2048
+-class CAirGap : public CDialog
++class CAirGap : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CAirGap)
+ 
+--- first-page/AxisOrbit.cpp
++++ all-pages/AxisOrbit.cpp
+@@ -77,6 +77,11 @@
+ 	
+ 	
+ CFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph(m_GraphX);
++	HSJStyleGraph(m_GraphY);
++	HSJStyleGraph(m_GraphAxis);
++
+ 
+ 	SetScrollSizes(MM_TEXT,CSize(0,0));
+ 	ResizeParentToFit();
+@@ -195,28 +200,8 @@
+ //消息：设置背景色
+ HBRUSH CAxisOrbit::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-			//不加任何处理或设置背景为透明   
+-
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-	return(CFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));    
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ BEGIN_EVENTSINK_MAP(CAxisOrbit, CFormView)
+ 	ON_EVENT(CAxisOrbit, IDC_CWGRAPHX, 15, CAxisOrbit::ZoomCwgraphx, VTS_NONE)
+--- first-page/AxisOrbit.h
++++ all-pages/AxisOrbit.h
+@@ -13,6 +13,8 @@
+ class CAxisOrbit : public CFormView /*CBCGPFormView*/
+ {
+ 	DECLARE_DYNCREATE(CAxisOrbit)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ 
+ protected:
+ 	CAxisOrbit();           // 动态创建所使用的受保护的构造函数
+--- first-page/AxisSetDlg.cpp
++++ all-pages/AxisSetDlg.cpp
+@@ -10,10 +10,10 @@
+ // CAxisSetDlg 对话框
+ 
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CAxisSetDlg, CDialog)
++IMPLEMENT_DYNAMIC(CAxisSetDlg, CHSJDialog)
+ 
+ CAxisSetDlg::CAxisSetDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(CAxisSetDlg::IDD, pParent),FunSel(1)
++	: CHSJDialog(CAxisSetDlg::IDD, pParent),FunSel(1)
+ {
+ 
+ }
+@@ -24,7 +24,7 @@
+ 
+ void CAxisSetDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_FILENAMECMBO, fileNameComb);
+ 	//DDX_Control(pDX, IDC_EXAMNAMECOMBO, examNameComb);
+ 	DDX_Control(pDX, IDC_EXAMTYPECOMBO, examTypeComb);
+@@ -34,7 +34,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CAxisSetDlg, CDialog)
++BEGIN_MESSAGE_MAP(CAxisSetDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CAxisSetDlg::OnBnClickedOk)
+ 	ON_CBN_SELCHANGE(IDC_FILENAMECMBO, &CAxisSetDlg::OnCbnSelchangeFilenamecmbo)
+ 	//ON_CBN_SELCHANGE(IDC_EXAMNAMECOMBO, &CAxisSetDlg::OnCbnSelchangeExamnamecombo)
+@@ -156,7 +156,7 @@
+ 
+ BOOL CAxisSetDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/AxisSetDlg.h
++++ all-pages/AxisSetDlg.h
+@@ -4,7 +4,7 @@
+ 
+ // CAxisSetDlg 对话框
+ 
+-class CAxisSetDlg : public CDialog
++class CAxisSetDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CAxisSetDlg)
+ 
+--- first-page/CamView.cpp
++++ all-pages/CamView.cpp
+@@ -57,6 +57,9 @@
+ void CCamView::OnInitialUpdate()
+ {
+ 	CFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph(m_Graph);
++
+ 	try
+ 	{
+ 		m_Graph.SetWindowText("协联工况 实验分析结果");
+@@ -429,28 +432,8 @@
+ 
+ HBRUSH CCamView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-			//不加任何处理或设置背景为透明   
+-
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-
+-	return(CFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));   
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ 
+ void CCamView::OnSize(UINT nType, int cx, int cy)
+--- first-page/CamView.h
++++ all-pages/CamView.h
+@@ -6,6 +6,8 @@
+ class CCamView : public CFormView
+ {
+ 	DECLARE_DYNCREATE(CCamView)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ 
+ protected:
+ 	CCamView();					// 动态创建所使用的受保护的构造函数
+--- first-page/CatListBox.cpp
++++ all-pages/CatListBox.cpp
+@@ -70,7 +70,7 @@
+ 
+    // Draw category's background.
+    CRect    rcValue = lpDrawItemStruct->rcItem;
+-   COLORREF crNew   = GetSysColor( bHighlight ? COLOR_HIGHLIGHT : COLOR_WINDOW );
++   COLORREF crNew   = (bHighlight ? RGB(232, 241, 253) : RGB(255, 255, 255));
+    COLORREF crOldBk = pDC->SetBkColor( crNew );
+    CBrush   brWindow( crNew );
+    pDC->FillRect( rcValue, &brWindow );
+@@ -91,7 +91,7 @@
+    if (lpDrawItemStruct->itemID == pCatInfo->iListIndex) {
+       // Draw category's background.
+       rcValue.bottom--;
+-      crNew = GetSysColor( COLOR_3DFACE );
++      crNew = HSJSurface();
+       if (!bHighlight) {
+          pDC->SetBkColor( crNew );
+          CBrush brBackGround( crNew );
+@@ -99,7 +99,7 @@
+       }
+ 
+       // Draw category's button frame.
+-      pDC->DrawFrameControl( rcButton, DFC_BUTTON, DFCS_BUTTONPUSH );
++      pDC->Draw3dRect(rcButton, HSJBorder(), HSJBorder());
+ 
+       // Draw "-" in button.
+       crNew = GetSysColor( IsWindowEnabled() ? COLOR_BTNTEXT : COLOR_GRAYTEXT );
+@@ -181,9 +181,9 @@
+    if (!IsWindowEnabled())
+       crNew = GetSysColor( COLOR_GRAYTEXT );
+    else if (bHighlight)
+-      crNew = GetSysColor( COLOR_HIGHLIGHTTEXT );
++      crNew = HSJAccent();
+    else
+-      crNew = GetSysColor( COLOR_WINDOWTEXT );
++      crNew = HSJInk();
+    COLORREF crOldTxt = pDC->SetTextColor( crNew );
+    CString  sText;
+    GetText( lpDrawItemStruct->itemID, sText );
+--- first-page/Correlation.cpp
++++ all-pages/Correlation.cpp
+@@ -64,6 +64,11 @@
+ void CCorrelation::OnInitialUpdate()
+ {
+ 	CFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph(m_GraphX);
++	HSJStyleGraph(m_GraphY);
++	HSJStyleGraph(m_GraphAxis);
++
+ 
+ 	/*--------------------------Marshall's Code2011.3.2 12:23--------------*/
+ 	//调整界面，不出现滚动条////Marshall  2011.3.2 12:23
+@@ -141,28 +146,8 @@
+ //消息：设置背景色
+ HBRUSH CCorrelation::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-			//不加任何处理或设置背景为透明   
+-
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-	return(CFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));    
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ BEGIN_EVENTSINK_MAP(CCorrelation, CFormView)
+ 	ON_EVENT(CCorrelation, IDC_CWGRAPHX, 15, CCorrelation::ZoomCwgraphx, VTS_NONE)
+--- first-page/Correlation.h
++++ all-pages/Correlation.h
+@@ -8,6 +8,8 @@
+ class CCorrelation : public CFormView
+ {
+ 	DECLARE_DYNCREATE(CCorrelation)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ 
+ protected:
+ 	CCorrelation();           // 动态创建所使用的受保护的构造函数
+--- first-page/CustomSaveDlg.cpp
++++ all-pages/CustomSaveDlg.cpp
+@@ -9,10 +9,10 @@
+ // CCustomSaveDlg 对话框
+ //CNiCtrlTestView* tv;
+ 
+-IMPLEMENT_DYNAMIC(CCustomSaveDlg, CDialog)
++IMPLEMENT_DYNAMIC(CCustomSaveDlg, CHSJDialog)
+ 
+ //CCustomSaveDlg::CCustomSaveDlg(CWnd* pParent /*=NULL*/)
+-//	: CDialog(CCustomSaveDlg::IDD, pParent)
++//	: CHSJDialog(CCustomSaveDlg::IDD, pParent)
+ //	, mWidth(0)
+ //	, mHeight(0)
+ //	, m_fileType(1)
+@@ -22,7 +22,7 @@
+ //}
+ 
+ CCustomSaveDlg::CCustomSaveDlg(CWnd* pParent /*=NULL*/,int w, int h)
+-: CDialog(CCustomSaveDlg::IDD, pParent)
++: CHSJDialog(CCustomSaveDlg::IDD, pParent)
+ ,m_fileType(1)
+ , m_bmpSize(1)
+ {
+@@ -36,7 +36,7 @@
+ 
+ void CCustomSaveDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_Width, m_nWidth);
+ 	DDX_Control(pDX, IDC_Height, m_nHeight);
+ 	DDX_Control(pDX, IDC_RADIO1, m_Radio1);
+@@ -49,7 +49,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CCustomSaveDlg, CDialog)
++BEGIN_MESSAGE_MAP(CCustomSaveDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_RADIO1, &CCustomSaveDlg::OnBnClickedRadio1)
+ 	ON_BN_CLICKED(IDC_RADIO2, &CCustomSaveDlg::OnBnClickedRadio2)
+ 	ON_BN_CLICKED(IDC_RADIO3, &CCustomSaveDlg::OnBnClickedRadio3)
+@@ -74,14 +74,14 @@
+ 
+ 	m_nHeight.GetWindowText(strCurrent);
+ 	mHeight = atoi(strCurrent.GetBuffer());
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+ 
+ 
+ BOOL CCustomSaveDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/CustomSaveDlg.h
++++ all-pages/CustomSaveDlg.h
+@@ -3,7 +3,7 @@
+ 
+ // CCustomSaveDlg 对话框
+ 
+-class CCustomSaveDlg : public CDialog
++class CCustomSaveDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CCustomSaveDlg)
+ 
+--- first-page/DynamicEquilibrium.cpp
++++ all-pages/DynamicEquilibrium.cpp
+@@ -114,32 +114,19 @@
+ 
+ HBRUSH CDynamicEquilibrium::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-	}  	
+- 
+-	return(CFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));    
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ 
+ void CDynamicEquilibrium::OnInitialUpdate()
+ {
+ 	
+ 	CFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph(m_Graph);
++	HSJStyleGraph(m_newGraph);
++	HSJStyleGraph(m_DynEquGraph);
++
+ 
+ 	/*--------------------------Marshall's Code2011.3.2 12:23--------------*/
+ 	//调整界面，不出现滚动条////Marshall  2011.3.2 12:23
+--- first-page/DynamicEquilibrium.h
++++ all-pages/DynamicEquilibrium.h
+@@ -9,6 +9,8 @@
+ class CDynamicEquilibrium : public CFormView
+ {
+ 	DECLARE_DYNCREATE(CDynamicEquilibrium)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ 
+ protected:
+ 	virtual ~CDynamicEquilibrium();
+--- first-page/DynamicEquilibriumSetDLG.cpp
++++ all-pages/DynamicEquilibriumSetDLG.cpp
+@@ -10,10 +10,10 @@
+ using namespace std;
+ // CDynamicEquilibriumSetDLG 对话框
+ 
+-IMPLEMENT_DYNAMIC(CDynamicEquilibriumSetDLG, CDialog)
++IMPLEMENT_DYNAMIC(CDynamicEquilibriumSetDLG, CHSJDialog)
+ CDynamicEquilibrium* cdeView;
+ CDynamicEquilibriumSetDLG::CDynamicEquilibriumSetDLG(CWnd* pParent /*=NULL*/)
+-	: CDialog(CDynamicEquilibriumSetDLG::IDD, pParent),DataType(0)
++	: CHSJDialog(CDynamicEquilibriumSetDLG::IDD, pParent),DataType(0)
+ {
+ 	cdeView=(CDynamicEquilibrium*)pParent;
+ }
+@@ -24,7 +24,7 @@
+ 
+ void CDynamicEquilibriumSetDLG::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_FILENAMECMBO, fileNameComb);
+ 	//DDX_Control(pDX, IDC_EXAMNAMECOMBO, examNameComb);
+ 	DDX_Control(pDX, IDC_EXAMTYPECOMBO, examTypeComb);
+@@ -33,7 +33,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CDynamicEquilibriumSetDLG, CDialog)
++BEGIN_MESSAGE_MAP(CDynamicEquilibriumSetDLG, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CDynamicEquilibriumSetDLG::OnBnClickedOk)
+ 	ON_CBN_SELCHANGE(IDC_FILENAMECMBO, &CDynamicEquilibriumSetDLG::OnCbnSelchangeFilenamecmbo)
+ 	ON_CBN_SELCHANGE(IDC_EXAMTYPECOMBO, &CDynamicEquilibriumSetDLG::OnCbnSelchangeExamtypecombo)
+@@ -161,7 +161,7 @@
+ 
+ BOOL CDynamicEquilibriumSetDLG::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/DynamicEquilibriumSetDLG.h
++++ all-pages/DynamicEquilibriumSetDLG.h
+@@ -3,7 +3,7 @@
+ 
+ // CDynamicEquilibriumSetDLG 对话框
+ 
+-class CDynamicEquilibriumSetDLG : public CDialog
++class CDynamicEquilibriumSetDLG : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CDynamicEquilibriumSetDLG)
+ 
+--- first-page/DynEquCmpDlg.cpp
++++ all-pages/DynEquCmpDlg.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CDynEquCmpDlg 对话框
+ 
+-IMPLEMENT_DYNAMIC(CDynEquCmpDlg, CDialog)
++IMPLEMENT_DYNAMIC(CDynEquCmpDlg, CHSJDialog)
+ 
+ CDynEquCmpDlg::CDynEquCmpDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(CDynEquCmpDlg::IDD, pParent)
++	: CHSJDialog(CDynEquCmpDlg::IDD, pParent)
+ 	, BAmplitude(0)
+ 	, BPhase(0)
+ 	, AAmplitude(0)
+@@ -35,7 +35,7 @@
+ 
+ void CDynEquCmpDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 
+ 	//{{AFX_DATA_MAP(CDlgChaToXls)
+ 	//DDX_Control(pDX, IDC_EDIT_ENDTIME, m_editEndTime);
+@@ -72,7 +72,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CDynEquCmpDlg, CDialog)
++BEGIN_MESSAGE_MAP(CDynEquCmpDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CDynEquCmpDlg::OnBnClickedOk)
+ 	ON_BN_CLICKED(ID_BREAK, &CDynEquCmpDlg::OnBnClickedBreak)
+ END_MESSAGE_MAP()
+--- first-page/DynEquCmpDlg.h
++++ all-pages/DynEquCmpDlg.h
+@@ -3,7 +3,7 @@
+ 
+ // CDynEquCmpDlg 对话框
+ 
+-class CDynEquCmpDlg : public CDialog
++class CDynEquCmpDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CDynEquCmpDlg)
+ 
+--- first-page/Efficiency.cpp
++++ all-pages/Efficiency.cpp
+@@ -9,10 +9,10 @@
+ // CEfficiency 对话框
+ using namespace std;
+ 
+-IMPLEMENT_DYNAMIC(CEfficiency, CDialog)
++IMPLEMENT_DYNAMIC(CEfficiency, CHSJDialog)
+ 
+ CEfficiency::CEfficiency(CWnd* pParent /*=NULL*/)
+-	: CDialog(CEfficiency::IDD, pParent),diffElevation(0.0),density(1000.0),gravityAcc(9.83),elecEfficiency(0.985),FCoefficient(150.0),
++	: CHSJDialog(CEfficiency::IDD, pParent),diffElevation(0.0),density(1000.0),gravityAcc(9.83),elecEfficiency(0.985),FCoefficient(150.0),
+ 	vInArea(100.0),vOutArea(350.0),isDWhead(TRUE),factorQ(1.0),factorS(1.0)
+ {
+ 
+@@ -24,7 +24,7 @@
+ 
+ void CEfficiency::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_Density, m_density);
+ 	DDX_Control(pDX, IDC_gravityAcc, m_gravityAcc);
+ 	DDX_Control(pDX, IDC_elecEfficiency, m_elecEfficiency);
+@@ -76,7 +76,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CEfficiency, CDialog)
++BEGIN_MESSAGE_MAP(CEfficiency, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_SaveToText, &CEfficiency::OnBnClickedSavetotext)
+ 	ON_BN_CLICKED(IDC_isFlowmeter, &CEfficiency::OnBnClickedisflowmeter)
+ 	ON_BN_CLICKED(IDC_isVolutePres, &CEfficiency::OnBnClickedisvolutepres)
+@@ -539,7 +539,7 @@
+ 
+ BOOL CEfficiency::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/Efficiency.h
++++ all-pages/Efficiency.h
+@@ -4,7 +4,7 @@
+ 
+ // CEfficiency 对话框
+ 
+-class CEfficiency : public CDialog
++class CEfficiency : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CEfficiency)
+ 
+--- first-page/FilePorperty.cpp
++++ all-pages/FilePorperty.cpp
+@@ -13,10 +13,10 @@
+ 
+ 
+ 
+-IMPLEMENT_DYNAMIC(FilePorperty, CDialog)
++IMPLEMENT_DYNAMIC(FilePorperty, CHSJDialog)
+ 
+ FilePorperty::FilePorperty(CWnd* pParent /*=NULL*/)
+-	: CDialog(FilePorperty::IDD, pParent)
++	: CHSJDialog(FilePorperty::IDD, pParent)
+ {
+ 
+ }
+@@ -27,7 +27,7 @@
+ 
+ void FilePorperty::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_STATIC_Path, path);
+ 	DDX_Control(pDX, IDC_COMBO1, fileNameComb);
+ 	DDX_Control(pDX, IDC_STATIC_ExamName, examName);
+@@ -42,7 +42,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(FilePorperty, CDialog)
++BEGIN_MESSAGE_MAP(FilePorperty, CHSJDialog)
+ 	ON_CBN_SELCHANGE(IDC_COMBO1, &FilePorperty::OnCbnSelchangeCombo1)	
+ END_MESSAGE_MAP()
+ 
+@@ -52,7 +52,7 @@
+ 
+ BOOL FilePorperty::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/FilePorperty.h
++++ all-pages/FilePorperty.h
+@@ -5,7 +5,7 @@
+ 
+ // FilePorperty 对话框
+ 
+-class FilePorperty : public CDialog
++class FilePorperty : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(FilePorperty)
+ 
+--- first-page/JiggerExamSet.cpp
++++ all-pages/JiggerExamSet.cpp
+@@ -16,10 +16,10 @@
+ 
+ // CJiggerExamSet 对话框
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CJiggerExamSet, CDialog)
++IMPLEMENT_DYNAMIC(CJiggerExamSet, CHSJDialog)
+ 
+ CJiggerExamSet::CJiggerExamSet(CWnd* pParent /*=NULL*/)
+-	: CDialog(CJiggerExamSet::IDD, pParent),savePath("")
++	: CHSJDialog(CJiggerExamSet::IDD, pParent),savePath("")
+ {
+ 	JView =(CJiggerView*) pParent;
+ }
+@@ -30,7 +30,7 @@
+ 
+ void CJiggerExamSet::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_FILENAMECMBO, fileNameComb);
+ 	DDX_Control(pDX, IDC_EXAMTYPECOMBO, examTypeComb);
+ 
+@@ -58,7 +58,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CJiggerExamSet, CDialog)
++BEGIN_MESSAGE_MAP(CJiggerExamSet, CHSJDialog)
+ 	ON_CBN_SELCHANGE(IDC_FILENAMECMBO, &CJiggerExamSet::OnCbnSelchangeFilenamecmbo)
+ 	ON_CBN_SELCHANGE(IDC_EXAMTYPECOMBO, &CJiggerExamSet::OnCbnSelchangeExamtypecombo)
+ 	ON_CBN_SELCHANGE(IDC_OEXAMPARAMCOMBO, &CJiggerExamSet::OnCbnSelchangeOexamparamcombo)
+@@ -88,7 +88,7 @@
+ 
+ BOOL CJiggerExamSet::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/JiggerExamSet.h
++++ all-pages/JiggerExamSet.h
+@@ -4,7 +4,7 @@
+ 
+ // CJiggerExamSet 对话框
+ 
+-class CJiggerExamSet : public CDialog
++class CJiggerExamSet : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CJiggerExamSet)
+ 
+--- first-page/JiggerView.cpp
++++ all-pages/JiggerView.cpp
+@@ -404,6 +404,10 @@
+ void CJiggerView::OnInitialUpdate()
+ {
+ 	CFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph(m_Graph);
++	HSJStyleGraph(m_NewGraph);
++
+ 	/*--------------------------Marshall's Code2011.3.2 12:23--------------*/
+ 	//调整界面，不出现滚动条////Marshall  2011.3.2 12:23
+ 	SetScrollSizes(MM_TEXT,CSize(0,0));
+@@ -420,25 +424,8 @@
+ 
+ HBRUSH CJiggerView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-	return hbr;
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ 
+ int CJiggerView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+--- first-page/JiggerView.h
++++ all-pages/JiggerView.h
+@@ -8,6 +8,8 @@
+ class CJiggerView : public CFormView
+ {
+ 	DECLARE_DYNCREATE(CJiggerView)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ 	CJiggerView();           // 动态创建所使用的受保护的构造函数
+ protected:
+ 
+--- first-page/LodDataFFT.cpp
++++ all-pages/LodDataFFT.cpp
+@@ -9,10 +9,10 @@
+ 
+ // CLodDataFFT 对话框
+ 
+-IMPLEMENT_DYNAMIC(CLodDataFFT, CDialog)
++IMPLEMENT_DYNAMIC(CLodDataFFT, CHSJDialog)
+ 
+ CLodDataFFT::CLodDataFFT(CWnd* pParent /*=NULL*/)
+-	: CDialog(CLodDataFFT::IDD, pParent)
++	: CHSJDialog(CLodDataFFT::IDD, pParent)
+ 	, m_FilePathName(_T(""))
+ 	, m_Title(_T(""))
+ 	, m_Freq(_T("1024")),fileData()/*,isReadFileOK(TRUE)*/
+@@ -26,7 +26,7 @@
+ 
+ void CLodDataFFT::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_COLOR_PICKER, m_ColorPicker);
+ 	DDX_Text(pDX, IDC_RGB, m_strRGB);
+ 	DDX_Text(pDX, IDC_FILENAMEEDIT, m_FilePathName);
+@@ -35,7 +35,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CLodDataFFT, CDialog)
++BEGIN_MESSAGE_MAP(CLodDataFFT, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER, &CLodDataFFT::OnBnClickedColorPicker)
+ 	ON_BN_CLICKED(IDOK, &CLodDataFFT::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &CLodDataFFT::OnBnClickedButton1)
+@@ -58,7 +58,7 @@
+ //消息：初始化
+ BOOL CLodDataFFT::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/LodDataFFT.h
++++ all-pages/LodDataFFT.h
+@@ -4,7 +4,7 @@
+ 
+ // CLodDataFFT 对话框
+ 
+-class CLodDataFFT : public CDialog
++class CLodDataFFT : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CLodDataFFT)
+ 
+--- first-page/MainFrm.cpp
++++ all-pages/MainFrm.cpp
+@@ -10,6 +10,10 @@
+ #include "HSJAppearance.h"
+ 
+ IMPLEMENT_DYNCREATE(CHSJVisualManager, CBCGPVisualManagerXP)
++IMPLEMENT_DYNAMIC(CHSJDialog, CDialog)
++BEGIN_MESSAGE_MAP(CHSJDialog, CDialog)
++    ON_WM_CTLCOLOR()
++END_MESSAGE_MAP()
+ #include "SaveImageBatDlg.h"
+ #include "ChildFrm.h"
+ #include "SaveDataDlg.h"
+--- first-page/Ni3DWaveView.cpp
++++ all-pages/Ni3DWaveView.cpp
+@@ -15,7 +15,7 @@
+ //#include "excel.h"
+ // CSetAxis 对话框
+ 
+-IMPLEMENT_DYNAMIC(CSetAxis, CDialog)
++IMPLEMENT_DYNAMIC(CSetAxis, CHSJDialog)
+ CNi3DWaveView* T3dView;
+ 
+ CString m_title;
+@@ -23,7 +23,7 @@
+ extern bool g_bWaveNew;
+ 
+ CSetAxis::CSetAxis(CWnd* pParent /*=NULL*/)
+-: CDialog(CSetAxis::IDD, pParent)/*,Xmin(0),Xmax(0),Ymin(0),Ymax(0),Zmin(0),Zmax(0)*/
++: CHSJDialog(CSetAxis::IDD, pParent)/*,Xmin(0),Xmax(0),Ymin(0),Ymax(0),Zmin(0),Zmax(0)*/
+ , m_strFreqName(_T(""))
+ {
+ 	T3dView=(CNi3DWaveView*)pParent;
+@@ -39,7 +39,7 @@
+ 
+ void CSetAxis::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Text(pDX, IDC_XMinEDIT, m_xMin);
+ 	DDX_Text(pDX, IDC_XMaxEDIT, m_xMax);
+ 	DDX_Text(pDX, IDC_YMinEDIT, m_yMin);
+@@ -51,7 +51,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CSetAxis, CDialog)
++BEGIN_MESSAGE_MAP(CSetAxis, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CSetAxis::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDCANCEL, &CSetAxis::OnBnClickedCancel)
+ END_MESSAGE_MAP()
+@@ -98,7 +98,7 @@
+ 
+ BOOL CSetAxis::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -207,6 +207,9 @@
+ void CNi3DWaveView::OnInitialUpdate()
+ {
+ 	CBCGPFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph3D(m_graph);
++
+ 
+ 	/*--------------------------Marshall's Code2011.3.2 12:23--------------*/
+ 	//调整界面，不出现滚动条////Marshall  2011.3.2 12:23
+@@ -984,26 +987,8 @@
+ 
+ HBRUSH CNi3DWaveView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CBCGPFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-	return(CBCGPFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));   
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CBCGPFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ //批量存储视图
+ void CNi3DWaveView::OnSavet3dviewbatdlg()
+--- first-page/Ni3DWaveView.h
++++ all-pages/Ni3DWaveView.h
+@@ -6,7 +6,7 @@
+ #include "afxwin.h"
+ // CSetAxis 对话框
+ 
+-class CSetAxis : public CDialog
++class CSetAxis : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSetAxis)
+ 
+@@ -64,6 +64,8 @@
+ class CNi3DWaveView : public CBCGPFormView
+ {
+ 	DECLARE_DYNCREATE(CNi3DWaveView)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ public:
+ 
+ //protected:
+--- first-page/niwavefraqview.cpp
++++ all-pages/niwavefraqview.cpp
+@@ -50,10 +50,10 @@
+ static 		CString title;
+ // CSetTitle 对话框
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CSetTitle, CDialog)
++IMPLEMENT_DYNAMIC(CSetTitle, CHSJDialog)
+ 
+ CSetTitle::CSetTitle(CWnd* pParent /*=NULL*/)
+-: CDialog(CSetTitle::IDD, pParent)
++: CHSJDialog(CSetTitle::IDD, pParent)
+ {
+ 
+ }
+@@ -64,12 +64,12 @@
+ 
+ void CSetTitle::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_EDIT1, m_title);	
+ }
+ BOOL CSetTitle::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -81,7 +81,7 @@
+ 	return TRUE;  // return TRUE unless you set the focus to a control
+ }
+ 
+-BEGIN_MESSAGE_MAP(CSetTitle, CDialog)
++BEGIN_MESSAGE_MAP(CSetTitle, CHSJDialog)
+ END_MESSAGE_MAP()
+ 
+ 
+@@ -91,7 +91,7 @@
+ {
+ 	// TODO: 在此添加专用代码和/或调用基类
+ 	m_title.GetWindowText(mTitle);
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ // CNiWaveFraqView
+ 
+--- first-page/NiWaveFraqView.h
++++ all-pages/NiWaveFraqView.h
+@@ -8,7 +8,7 @@
+ #include "afxwin.h"
+ #include "CWaveFreqCom.h"
+ 
+-class CSetTitle : public CDialog
++class CSetTitle : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSetTitle)
+ 
+--- first-page/SaveCHNToExcel.cpp
++++ all-pages/SaveCHNToExcel.cpp
+@@ -12,7 +12,7 @@
+ 
+ // CSaveCHNToExcel 对话框
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CSaveCHNToExcel, CDialog)
++IMPLEMENT_DYNAMIC(CSaveCHNToExcel, CHSJDialog)
+ const int col=32;
+ CString ExcelHeadArray[col];
+ 
+@@ -23,7 +23,7 @@
+ /*--------------------------Marshall's Code2011.2.24 10:51--------------*/
+ 
+ CSaveCHNToExcel::CSaveCHNToExcel(CWnd* pParent /*=NULL*/)
+-	: CDialog(CSaveCHNToExcel::IDD, pParent),filePath(""), 
++	: CHSJDialog(CSaveCHNToExcel::IDD, pParent),filePath(""), 
+ 	m_application(false), m_workBook(m_application.NewWorkbook())/*, m_workSheet(m_workBook.GetWorksheet(1))*/
+ {
+ 	isHasKeyPhase=FALSE;
+@@ -54,7 +54,7 @@
+ 
+ void CSaveCHNToExcel::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_EDIT1, m_savePath);
+ 	DDX_Control(pDX, IDC_STATIC_MSG, m_msg);
+ 	DDX_Control(pDX, IDC_STATIC_TYPEEXAM, m_examType);
+@@ -69,7 +69,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CSaveCHNToExcel, CDialog)
++BEGIN_MESSAGE_MAP(CSaveCHNToExcel, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CSaveCHNToExcel::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &CSaveCHNToExcel::OnBnClickedButton1)
+ 	ON_BN_CLICKED(IDCANCEL, &CSaveCHNToExcel::OnBnClickedCancel)
+@@ -87,7 +87,7 @@
+ 
+ 
+ 	
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	m_List.SetExtendedStyle(LVS_EX_GRIDLINES|LVS_EX_CHECKBOXES);
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+--- first-page/SaveCHNToExcel.h
++++ all-pages/SaveCHNToExcel.h
+@@ -6,7 +6,7 @@
+ #include "ReportCtrl.h"
+ // CSaveCHNToExcel 对话框
+ 
+-class CSaveCHNToExcel : public CDialog
++class CSaveCHNToExcel : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSaveCHNToExcel)
+ 
+--- first-page/SaveCHNWord.cpp
++++ all-pages/SaveCHNWord.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CSaveCHNWord 对话框
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CSaveCHNWord, CDialog)
++IMPLEMENT_DYNAMIC(CSaveCHNWord, CHSJDialog)
+ 
+ CSaveCHNWord::CSaveCHNWord(CWnd* pParent /*=NULL*/)
+-	: CDialog(CSaveCHNWord::IDD, pParent),wordVision(1)
++	: CHSJDialog(CSaveCHNWord::IDD, pParent),wordVision(1)
+ {
+ 
+ }
+@@ -22,7 +22,7 @@
+ 
+ void CSaveCHNWord::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_EDIT1, m_savePath);
+ 	DDX_Control(pDX, IDC_STATIC_MSG, m_msg);
+ 	DDX_Control(pDX, IDC_STATIC_TYPEEXAM, m_examType);
+@@ -35,7 +35,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CSaveCHNWord, CDialog)
++BEGIN_MESSAGE_MAP(CSaveCHNWord, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &CSaveCHNWord::OnBnClickedButton1)
+ 	ON_BN_CLICKED(IDCANCEL, &CSaveCHNWord::OnBnClickedCancel)
+ 	ON_BN_CLICKED(IDOK, &CSaveCHNWord::OnBnClickedOk)
+@@ -667,7 +667,7 @@
+ 
+ BOOL CSaveCHNWord::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//CheckRadioButton(IDC_RADIO1,IDC_RADIO2,IDC_RADIO1);
+ 	//m_List.SetExtendedStyle(LVS_EX_GRIDLINES|LVS_EX_CHECKBOXES);
+ 	////m_List.SetColumnHeader(_T("参数,150;"));
+--- first-page/SaveCHNWord.h
++++ all-pages/SaveCHNWord.h
+@@ -6,7 +6,7 @@
+ #include "catlistbox.h"
+ // CSaveCHNWord 对话框
+ 
+-class CSaveCHNWord : public CDialog
++class CSaveCHNWord : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSaveCHNWord)
+ 
+--- first-page/SaveDataDlg.cpp
++++ all-pages/SaveDataDlg.cpp
+@@ -11,11 +11,11 @@
+ 
+ // SaveDataDlg 对话框
+ 
+-IMPLEMENT_DYNAMIC(SaveDataDlg, CDialog)
++IMPLEMENT_DYNAMIC(SaveDataDlg, CHSJDialog)
+ 
+ 
+ SaveDataDlg::SaveDataDlg(CWnd* pParent /*=NULL*/)
+-: CDialog(SaveDataDlg::IDD, pParent),m_bShowHeader(TRUE),examParam(),
++: CHSJDialog(SaveDataDlg::IDD, pParent),m_bShowHeader(TRUE),examParam(),
+ 								examName(""),sortFilePath(""),filePath(""),examType("")/*,SaveFileType(1)*/
+ {
+ 
+@@ -28,7 +28,7 @@
+ 
+ void SaveDataDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_LIST2, m_chnList);
+ 	DDX_Control(pDX, IDC_LIST2, m_chnList);
+ 	DDX_Control(pDX, IDC_STATIC_MSG, m_msg);
+@@ -40,7 +40,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(SaveDataDlg, CDialog)
++BEGIN_MESSAGE_MAP(SaveDataDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &SaveDataDlg::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &SaveDataDlg::OnBnClickedButton1)
+ 	//ON_BN_CLICKED(IDC_BUTTON2, &SaveDataDlg::OnBnClickedButton2)
+@@ -198,7 +198,7 @@
+ 
+ BOOL SaveDataDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/SaveDataDlg.h
++++ all-pages/SaveDataDlg.h
+@@ -5,7 +5,7 @@
+ 
+ // SaveDataDlg 对话框
+ 
+-class SaveDataDlg : public CDialog
++class SaveDataDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(SaveDataDlg)
+ 
+--- first-page/SaveImageBatDlg.cpp
++++ all-pages/SaveImageBatDlg.cpp
+@@ -9,10 +9,10 @@
+ using namespace std;
+ 
+ 
+-IMPLEMENT_DYNAMIC(SaveImageBatDlg, CDialog)
++IMPLEMENT_DYNAMIC(SaveImageBatDlg, CHSJDialog)
+ 
+ SaveImageBatDlg::SaveImageBatDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(SaveImageBatDlg::IDD, pParent),m_fileType(3),m_bShowHeader(TRUE),examParam()/*,isSelFile(FALSE)*/,
++	: CHSJDialog(SaveImageBatDlg::IDD, pParent),m_fileType(3),m_bShowHeader(TRUE),examParam()/*,isSelFile(FALSE)*/,
+ 											examName(""),sortFilePath(""),filePath(""),examType(""),configPath(""),m_Bconfig(FALSE),m_index(0),m_temp(0),m_con(false)
+ {
+ 	for (int i=0;i<100;i++)
+@@ -33,7 +33,7 @@
+ 
+ void SaveImageBatDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//DDX_Control(pDX, IDC_FILENAMECMBO, fileNameComb);
+ 	//DDX_Control(pDX, IDC_EXAMTYPECOMBO, examTypeComb);
+ 	DDX_Control(pDX, IDC_RADIO1, m_Radio1);
+@@ -57,7 +57,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(SaveImageBatDlg, CDialog)
++BEGIN_MESSAGE_MAP(SaveImageBatDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &SaveImageBatDlg::OnBnClickedButton1)
+ 	ON_BN_CLICKED(IDC_RADIO1, &SaveImageBatDlg::OnBnClickedRadio1)
+ 	ON_BN_CLICKED(IDC_RADIO2, &SaveImageBatDlg::OnBnClickedRadio2)
+@@ -119,7 +119,7 @@
+ 
+ BOOL SaveImageBatDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/SaveImageBatDlg.h
++++ all-pages/SaveImageBatDlg.h
+@@ -8,7 +8,7 @@
+ 
+ // SaveImageBatDlg 对话框
+ 
+-class SaveImageBatDlg : public CDialog
++class SaveImageBatDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(SaveImageBatDlg)
+ 
+--- first-page/SaveT3dViewDlg.cpp
++++ all-pages/SaveT3dViewDlg.cpp
+@@ -12,10 +12,10 @@
+ extern bool g_bWaveNew;
+ 
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CSaveT3dViewDlg, CDialog)
++IMPLEMENT_DYNAMIC(CSaveT3dViewDlg, CHSJDialog)
+ 
+ CSaveT3dViewDlg::CSaveT3dViewDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(CSaveT3dViewDlg::IDD, pParent),m_fileType(3),xMax(100),xMin(0),yMin(0),yMax(512),zMax(100),zMin(-10),isCAxis(FALSE)
++	: CHSJDialog(CSaveT3dViewDlg::IDD, pParent),m_fileType(3),xMax(100),xMin(0),yMin(0),yMax(512),zMax(100),zMin(-10),isCAxis(FALSE)
+ {
+ 
+ }
+@@ -26,7 +26,7 @@
+ 
+ void CSaveT3dViewDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_EDIT1, m_savePath);
+ 	DDX_Control(pDX, IDC_RADIO1, m_Radio1);
+ 	DDX_Control(pDX, IDC_RADIO2, m_Radio2);
+@@ -70,7 +70,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CSaveT3dViewDlg, CDialog)
++BEGIN_MESSAGE_MAP(CSaveT3dViewDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &CSaveT3dViewDlg::OnBnClickedButton1)
+ 	ON_BN_CLICKED(IDC_RADIO1, &CSaveT3dViewDlg::OnBnClickedRadio1)
+ 	ON_BN_CLICKED(IDC_RADIO2, &CSaveT3dViewDlg::OnBnClickedRadio2)
+@@ -103,7 +103,7 @@
+ 
+ BOOL CSaveT3dViewDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	m_progress.ShowWindow(FALSE);
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/SaveT3dViewDlg.h
++++ all-pages/SaveT3dViewDlg.h
+@@ -5,7 +5,7 @@
+ 
+ // CSaveT3dViewDlg 对话框
+ 
+-class CSaveT3dViewDlg : public CDialog
++class CSaveT3dViewDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSaveT3dViewDlg)
+ 
+--- first-page/SaveTrendToExcelDlg.cpp
++++ all-pages/SaveTrendToExcelDlg.cpp
+@@ -8,7 +8,7 @@
+ 
+ // CSaveTrendToExcelDlg 对话框
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CSaveTrendToExcelDlg, CDialog)
++IMPLEMENT_DYNAMIC(CSaveTrendToExcelDlg, CHSJDialog)
+ const int trendCol=33;
+ CString ExcelTrendHeadArray[trendCol];
+ 
+@@ -19,7 +19,7 @@
+ /*--------------------------Marshall's Code2011.2.24 10:51--------------*/
+ 
+ CSaveTrendToExcelDlg::CSaveTrendToExcelDlg(CWnd* pParent /*=NULL*/)
+-: CDialog(CSaveTrendToExcelDlg::IDD, pParent), filePath(""), isGraph(false),
++: CHSJDialog(CSaveTrendToExcelDlg::IDD, pParent), filePath(""), isGraph(false),
+ m_application(false), m_workBook(m_application.NewWorkbook()),m_strUnit(""),m_strAcc("")
+ {
+ 
+@@ -51,7 +51,7 @@
+ 
+ void CSaveTrendToExcelDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_EDIT1, m_savePath);
+ 	DDX_Control(pDX, IDC_STATIC_MSG, m_msg);
+ 
+@@ -69,7 +69,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CSaveTrendToExcelDlg, CDialog)
++BEGIN_MESSAGE_MAP(CSaveTrendToExcelDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_BUTTON1, &CSaveTrendToExcelDlg::OnBnClickedButton1)
+ 	ON_BN_CLICKED(IDOK, &CSaveTrendToExcelDlg::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDCANCEL, &CSaveTrendToExcelDlg::OnBnClickedCancel)
+@@ -101,7 +101,7 @@
+ 
+ BOOL CSaveTrendToExcelDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+ 	SetIcon(hIcon,   FALSE); //   Set   small   icon   
+--- first-page/SaveTrendToExcelDlg.h
++++ all-pages/SaveTrendToExcelDlg.h
+@@ -5,7 +5,7 @@
+ 
+ // CSaveTrendToExcelDlg 对话框
+ 
+-class CSaveTrendToExcelDlg : public CDialog
++class CSaveTrendToExcelDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSaveTrendToExcelDlg)
+ 
+--- first-page/ScanAnalysis.cpp
++++ all-pages/ScanAnalysis.cpp
+@@ -166,7 +166,7 @@
+ 
+ // CAboutDlg dialog used for App About
+ 
+-class CAboutDlg : public CDialog
++class CAboutDlg : public CHSJDialog
+ {
+ public:
+ 	CAboutDlg();
+@@ -191,17 +191,17 @@
+ 	virtual BOOL OnInitDialog();
+ };
+ 
+-CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
++CAboutDlg::CAboutDlg() : CHSJDialog(CAboutDlg::IDD)
+ { 
+ }
+ 
+ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//DDX_Control(pDX, IDC_COMPANY_URL, m_btnURL);
+ }
+ 
+-BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
++BEGIN_MESSAGE_MAP(CAboutDlg, CHSJDialog)
+ 	//ON_BN_CLICKED(IDOK, &CAboutDlg::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDOK, &CAboutDlg::OnBnClickedOk)
+ //	ON_WM_INITMENUPOPUP()
+@@ -225,14 +225,14 @@
+ 
+ //void CAboutDlg::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu)
+ //{
+-//	CDialog::OnInitMenuPopup(pPopupMenu, nIndex, bSysMenu);
++//	CHSJDialog::OnInitMenuPopup(pPopupMenu, nIndex, bSysMenu);
+ //
+ //
+ //}
+ 
+ BOOL CAboutDlg::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+--- first-page/Set3DFreqDlg.cpp
++++ all-pages/Set3DFreqDlg.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CSet3DFreqDlg 对话框
+ 
+-IMPLEMENT_DYNAMIC(CSet3DFreqDlg, CDialog)
++IMPLEMENT_DYNAMIC(CSet3DFreqDlg, CHSJDialog)
+ 
+ CSet3DFreqDlg::CSet3DFreqDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(CSet3DFreqDlg::IDD, pParent)
++	: CHSJDialog(CSet3DFreqDlg::IDD, pParent)
+ {
+ 	m_brhTl.CreateSolidBrush(RGB(0,0,0));
+ 	m_clrTl = RGB(0,0,0);
+@@ -35,7 +35,7 @@
+ 
+ void CSet3DFreqDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_STC_TLFONT, m_stcTlFont);
+ 	DDX_Control(pDX, IDC_STC_XFONT, m_stcXFont);
+ 	DDX_Control(pDX, IDC_STC_YFONT, m_stcYFont);
+@@ -43,7 +43,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CSet3DFreqDlg, CDialog)
++BEGIN_MESSAGE_MAP(CSet3DFreqDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_BTN_TITLEFNT, &CSet3DFreqDlg::OnBnClickedBtnTitlefnt)
+ 	ON_BN_CLICKED(IDC_BTN_TITLECLR, &CSet3DFreqDlg::OnBnClickedBtnTitleclr)
+ 	ON_WM_CTLCOLOR()
+@@ -107,7 +107,7 @@
+ 
+ HBRUSH CSet3DFreqDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) 
+ {
+-	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
++	HBRUSH hbr = CHSJDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+ 	
+ 	// TODO: Change any attributes of the DC here
+ 	int nID = pWnd->GetDlgCtrlID();
+@@ -290,7 +290,7 @@
+ 
+ BOOL CSet3DFreqDlg::OnInitDialog() 
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	
+ 	// TODO: Add extra initialization here
+ 	m_stcTlFont.SetFont(&m_fntTl);
+--- first-page/Set3DFreqDlg.h
++++ all-pages/Set3DFreqDlg.h
+@@ -4,7 +4,7 @@
+ 
+ // CSet3DFreqDlg 对话框
+ 
+-class CSet3DFreqDlg : public CDialog
++class CSet3DFreqDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CSet3DFreqDlg)
+ 
+--- first-page/stdafx.h
++++ all-pages/stdafx.h
+@@ -57,6 +57,7 @@
+ 
+ //{{AFX Measurement Studio
+ #include "NiIncludes.h"
++#include "HSJDialogAppearance.h"
+ //}}AFX Measurement Studio
+ 
+ #define  mPI 3.1415926535897932384626433832795
+--- first-page/StripChart/AddGroup.cpp
++++ all-pages/StripChart/AddGroup.cpp
+@@ -19,7 +19,7 @@
+ 
+ 
+ CAddGroup::CAddGroup(CWnd* pParent /*=NULL*/)
+-	: CDialog(CAddGroup::IDD, pParent)
++	: CHSJDialog(CAddGroup::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CAddGroup)
+ 		// NOTE: the ClassWizard will add member initialization here
+@@ -29,7 +29,7 @@
+ 
+ void CAddGroup::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CAddGroup)
+ 	//DDX_Control(pDX, IDC_TREE1, m_Tree);
+ 	//}}AFX_DATA_MAP
+@@ -37,7 +37,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CAddGroup, CDialog)
++BEGIN_MESSAGE_MAP(CAddGroup, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CAddGroup)
+ 	//}}AFX_MSG_MAP
+ 
+@@ -51,7 +51,7 @@
+ 
+ BOOL CAddGroup::OnInitDialog() 
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -76,7 +76,7 @@
+ 	//CInitialConfig::SeekToData(file);
+ 	initConfig.ReadFromTree(filePath,examType,examParam,/*samplFreq, */(CTree &)m_Tree, pView);		
+ 	initConfig.InfoComplete(pView, count, pView->yGridCount);
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+ void CAddGroup::SetChnInit(CString fPath,CString eType,CString eParam/*,int sFreq*/)
+--- first-page/StripChart/AddGroup.h
++++ all-pages/StripChart/AddGroup.h
+@@ -11,7 +11,7 @@
+ /////////////////////////////////////////////////////////////////////////////
+ // CAddGroup dialog
+ //#include "Tree.h"
+-class CAddGroup : public CDialog
++class CAddGroup : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/StripChart/boxingView.cpp
++++ all-pages/StripChart/boxingView.cpp
+@@ -93,7 +93,7 @@
+ 	dcMem.SelectObject(&bmp);
+ 	dcMem.FillSolidRect(0,0,(m_ViewPortExt.cx > rect.Width())? m_ViewPortExt.cx : rect.Width(), (m_ViewPortExt.cy > rect.Height())? m_ViewPortExt.cy : rect.Height(), RGB(255, 255, 255)); 
+ 	dcMem.SetBkMode(TRANSPARENT);
+-	dcMem.Rectangle(0, 0, m_ViewPortExt.cx, m_ViewPortExt.cy);
++	dcMem.Draw3dRect(0, 0, m_ViewPortExt.cx, m_ViewPortExt.cy, HSJBorder(), HSJBorder());
+ 
+ 	GriWidth = (m_ViewPortExt.cx - 130) / m_Columns;
+ 	GriHeight = (m_ViewPortExt.cy - 130) / m_Rows;
+@@ -103,10 +103,10 @@
+ 	m_viewportx = m_ViewPortExt.cx - 130 - 2 * startx;	
+ 
+ 	CFont font1;
+-	font1.CreatePointFont(110, "Arial");
++	font1.CreatePointFont(110, _T("Microsoft YaHei UI"));
+ 	//font1.CreatePointFont(200, "Arial");//cxy 20101126
+ 	dcMem.SelectObject(&font1);
+-	CPen dotpen(PS_DOT, 0, RGB(0, 0, 0));
++	CPen dotpen(PS_SOLID, 1, RGB(232, 237, 243));
+ 	CPen *poldpen = dcMem.SelectObject(&dotpen);
+ 	for (int i = 60 + startx; i < m_ViewPortExt.cx - 70; i = i + GriWidth)
+ 	{
+@@ -118,7 +118,8 @@
+ 		dcMem.MoveTo(60, j);
+ 		dcMem.LineTo(m_ViewPortExt.cx - 70, j);
+ 	}
+-	dcMem.SelectObject(poldpen);
++	CPen axisPen(PS_SOLID, 1, HSJBorder());
++	dcMem.SelectObject(&axisPen);
+ 	dcMem.MoveTo(60, 70);
+ 	dcMem.LineTo(m_ViewPortExt.cx - 71, 70);
+ 	dcMem.LineTo(m_ViewPortExt.cx - 71, m_ViewPortExt.cy - 61);
+@@ -182,9 +183,9 @@
+ 		}
+ 	}
+ 
+-	dcMem.SelectObject(poldpen);
++	dcMem.SelectObject(&axisPen);
+ 	dcMem.SetTextAlign(TA_RIGHT);
+-	dcMem.SetTextColor(RGB(0, 0, 0));
++	dcMem.SetTextColor(HSJInk());
+ 	for (int m = 0; m < boxing.GetSize(); m++)
+ 	{
+ 		dcMem.MoveTo(58 + (boxing[m].pos + 1) * GriWidth, 70 + starty + boxing[m].startindex * GriHeight + boxing[m].offsety);
+@@ -201,8 +202,8 @@
+ 		}
+ 	}
+ 	CFont font;
+-	//font.CreatePointFont(180, "Arial");
+-	font.CreatePointFont(180, "Arial"); //cxy 20101126
++	//font.CreatePointFont(180, _T("Microsoft YaHei UI"));
++	font.CreatePointFont(180, _T("Microsoft YaHei UI")); //cxy 20101126
+ 	dcMem.SelectObject(&font);
+ 	dcMem.SetTextAlign(TA_CENTER);
+ 	dcMem.TextOut(m_ViewPortExt.cx / 2, 30, m_title);	
+@@ -221,6 +222,7 @@
+ 		saveflag = 0;
+ 	}
+ 
++	dcMem.SelectObject(poldpen);
+ 	dcMem.DeleteDC();
+ 	bmp.DeleteObject();	
+ }
+--- first-page/StripChart/Config1.cpp
++++ all-pages/StripChart/Config1.cpp
+@@ -16,7 +16,7 @@
+ 
+ 
+ CConfig1::CConfig1(CWnd* pParent /*=NULL*/)
+-	: CDialog(CConfig1::IDD, pParent)
++	: CHSJDialog(CConfig1::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CConfig1)
+ 	m_Height = 0;
+@@ -29,7 +29,7 @@
+ 
+ void CConfig1::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CConfig1)
+ 	DDX_Control(pDX, IDC_EDIT4, m_EditColumns);
+ 	DDX_Control(pDX, IDC_EDIT3, m_EditRows);
+@@ -65,11 +65,11 @@
+ 		MessageBox("视图太大，请重新设置参数！");
+ 		return;
+ 	}
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CConfig1, CDialog)
++BEGIN_MESSAGE_MAP(CConfig1, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CConfig1)
+ 		// NOTE: the ClassWizard will add message map macros here
+ 	//}}AFX_MSG_MAP
+@@ -81,7 +81,7 @@
+ 
+ BOOL CConfig1::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+--- first-page/StripChart/Config1.h
++++ all-pages/StripChart/Config1.h
+@@ -10,7 +10,7 @@
+ /////////////////////////////////////////////////////////////////////////////
+ // CConfig1 dialog
+ 
+-class CConfig1 : public CDialog
++class CConfig1 : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/StripChart/ConfigTitle.cpp
++++ all-pages/StripChart/ConfigTitle.cpp
+@@ -16,7 +16,7 @@
+ 
+ 
+ CConfigTitle::CConfigTitle(CWnd* pParent /*=NULL*/)
+-	: CDialog(CConfigTitle::IDD, pParent)
++	: CHSJDialog(CConfigTitle::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CConfigTitle)
+ 	m_title = _T("");
+@@ -26,14 +26,14 @@
+ 
+ void CConfigTitle::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CConfigTitle)
+ 	DDX_Text(pDX, IDC_EDIT1, m_title);
+ 	//}}AFX_DATA_MAP
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CConfigTitle, CDialog)
++BEGIN_MESSAGE_MAP(CConfigTitle, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CConfigTitle)
+ 		// NOTE: the ClassWizard will add message map macros here
+ 	//}}AFX_MSG_MAP
+@@ -45,7 +45,7 @@
+ 
+ BOOL CConfigTitle::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+--- first-page/StripChart/ConfigTitle.h
++++ all-pages/StripChart/ConfigTitle.h
+@@ -10,7 +10,7 @@
+ /////////////////////////////////////////////////////////////////////////////
+ // CConfigTitle dialog
+ 
+-class CConfigTitle : public CDialog
++class CConfigTitle : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/StripChart/ConfigX.cpp
++++ all-pages/StripChart/ConfigX.cpp
+@@ -17,7 +17,7 @@
+ 
+ 
+ CConfigX::CConfigX(CWnd* pParent /*=NULL*/)
+-	: CDialog(CConfigX::IDD, pParent)
++	: CHSJDialog(CConfigX::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CConfigX)
+ 	m_StartTime = 0.0f;
+@@ -29,7 +29,7 @@
+ 
+ void CConfigX::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CConfigX)
+ 	DDX_Control(pDX, IDC_EDIT2, m_EditEndTime);
+ 	DDX_Control(pDX, IDC_EDIT1, m_EditStartTime);
+@@ -63,10 +63,10 @@
+ 		MessageBox("网格线太密，请重新设置参数！");
+ 		return;
+ 	}
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+-BEGIN_MESSAGE_MAP(CConfigX, CDialog)
++BEGIN_MESSAGE_MAP(CConfigX, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CConfigX)
+ 		// NOTE: the ClassWizard will add message map macros here
+ 	//}}AFX_MSG_MAP
+@@ -86,7 +86,7 @@
+ 
+ BOOL CConfigX::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+--- first-page/StripChart/ConfigX.h
++++ all-pages/StripChart/ConfigX.h
+@@ -10,7 +10,7 @@
+ /////////////////////////////////////////////////////////////////////////////
+ // CConfigX dialog
+ 
+-class CConfigX : public CDialog
++class CConfigX : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/StripChart/Configzuobiao.cpp
++++ all-pages/StripChart/Configzuobiao.cpp
+@@ -17,7 +17,7 @@
+ 
+ 
+ CConfigzuobiao::CConfigzuobiao(CWnd* pParent /*=NULL*/)
+-	: CDialog(CConfigzuobiao::IDD, pParent)
++	: CHSJDialog(CConfigzuobiao::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CConfigzuobiao)
+ 	m_Title = _T("");
+@@ -33,7 +33,7 @@
+ 
+ void CConfigzuobiao::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CConfigzuobiao)
+ 	DDX_Control(pDX, IDC_EDIT5, m_Editymax);
+ 	DDX_Control(pDX, IDC_EDIT6, m_Editymin);
+@@ -57,7 +57,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CConfigzuobiao, CDialog)
++BEGIN_MESSAGE_MAP(CConfigzuobiao, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CConfigzuobiao)
+ 	ON_CBN_SELCHANGE(IDC_COMBO1, OnSelchangeCombo1)
+ 	//}}AFX_MSG_MAP
+@@ -68,7 +68,7 @@
+ 
+ BOOL CConfigzuobiao::OnInitDialog() 
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -154,6 +154,6 @@
+ 		return;
+ 	}
+ 
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+--- first-page/StripChart/Configzuobiao.h
++++ all-pages/StripChart/Configzuobiao.h
+@@ -10,7 +10,7 @@
+ /////////////////////////////////////////////////////////////////////////////
+ // CConfigzuobiao dialog
+ #include "ColorEdit.h"
+-class CConfigzuobiao : public CDialog
++class CConfigzuobiao : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/StripChart/GroupSel.cpp
++++ all-pages/StripChart/GroupSel.cpp
+@@ -24,7 +24,7 @@
+ // CGroupSel dialog
+ 
+ CGroupSel::CGroupSel(CWnd* pParent /*=NULL*/)
+-	: CDialog(CGroupSel::IDD, pParent)
++	: CHSJDialog(CGroupSel::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CGroupSel)
+ 		// NOTE: the ClassWizard will add member initialization here
+@@ -34,14 +34,14 @@
+ 
+ void CGroupSel::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CGroupSel)
+ 	DDX_Control(pDX, IDC_LIST1, m_List);
+ 	//}}AFX_DATA_MAP
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CGroupSel, CDialog)
++BEGIN_MESSAGE_MAP(CGroupSel, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CGroupSel)
+ 	//}}AFX_MSG_MAP
+ 	//ON_BN_CLICKED(IDOK, &CGroupSel::OnBnClickedOk)
+@@ -52,7 +52,7 @@
+ 
+ BOOL CGroupSel::OnInitDialog() 
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -139,6 +139,6 @@
+ 		initConfig.ReadFromList(filePath,examType,examParam,/*samplFreq,*/ m_List, pView);
+ 		initConfig.InfoComplete(pView, count, pView->yGridCount);			
+ 	}
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+--- first-page/StripChart/GroupSel.h
++++ all-pages/StripChart/GroupSel.h
+@@ -11,7 +11,7 @@
+ /////////////////////////////////////////////////////////////////////////////
+ // CGroupSel dialog
+ 
+-class CGroupSel : public CDialog
++class CGroupSel : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/StripChart/InitialConfig.cpp
++++ all-pages/StripChart/InitialConfig.cpp
+@@ -57,7 +57,7 @@
+ RGB(64, 0, 128)/*RGB(0, 0, 0)*/};
+ 
+ CInitialConfig::CInitialConfig(CWnd* pParent /*=NULL*/)
+-	: CDialog(CInitialConfig::IDD, pParent)
++	: CHSJDialog(CInitialConfig::IDD, pParent)
+ {
+ 	//{{AFX_DATA_INIT(CInitialConfig)
+ 	m_Size = _T("");
+@@ -73,7 +73,7 @@
+ 
+ void CInitialConfig::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	//{{AFX_DATA_MAP(CInitialConfig)
+ 	DDX_Control(pDX, IDC_BUTTON2, m_buttonopp);
+ 	DDX_Control(pDX, IDC_BUTTON1, m_buttonall);
+@@ -98,7 +98,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CInitialConfig, CDialog)
++BEGIN_MESSAGE_MAP(CInitialConfig, CHSJDialog)
+ 	//{{AFX_MSG_MAP(CInitialConfig)
+ 	ON_CBN_SELCHANGE(IDC_COMBO1, OnSelchangeCombo1)
+ 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, OnSelchangeTab1)
+@@ -117,7 +117,7 @@
+ BOOL CInitialConfig::OnInitDialog() 
+ {	
+ 	CMainFrame* pCMF = (CMainFrame*)AfxGetMainWnd();
+-	CDialog::OnInitDialog();	
++	CHSJDialog::OnInitDialog();	
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -331,7 +331,7 @@
+ 	//}
+  
+     pView->Invalidate(TRUE);
+-	CDialog::OnOK();
++	CHSJDialog::OnOK();
+ }
+ 
+ float CInitialConfig::GetYMax(CBoxingView::LOGPOINT *point, int count)
+--- first-page/StripChart/InitialConfig.h
++++ all-pages/StripChart/InitialConfig.h
+@@ -12,7 +12,7 @@
+ #include "Tree.h"
+ //#include "BoxingList.h"
+ #include "afxwin.h"
+-class CInitialConfig : public CDialog
++class CInitialConfig : public CHSJDialog
+ {
+ // Construction
+ public:
+--- first-page/T3DFreqDataSet.cpp
++++ all-pages/T3DFreqDataSet.cpp
+@@ -12,10 +12,10 @@
+ extern bool g_bWaveNew;
+ 
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CT3DFreqDataSet, CDialog)
++IMPLEMENT_DYNAMIC(CT3DFreqDataSet, CHSJDialog)
+ 
+ CT3DFreqDataSet::CT3DFreqDataSet(CWnd* pParent /*=NULL*/)
+-	: CDialog(CT3DFreqDataSet::IDD, pParent)
++	: CHSJDialog(CT3DFreqDataSet::IDD, pParent)
+ {
+ 	m_bWaveNew = false;
+ //	isHasKeyPhase=FALSE;
+@@ -27,7 +27,7 @@
+ 
+ void CT3DFreqDataSet::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_FILENAMECMBO, fileNameComb);
+ 	DDX_Control(pDX, IDC_EXAMTYPECOMBO, examTypeComb);
+ 	DDX_Control(pDX, IDC_EXAMPARAMCOMBO, examParamComb);
+@@ -37,7 +37,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CT3DFreqDataSet, CDialog)
++BEGIN_MESSAGE_MAP(CT3DFreqDataSet, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CT3DFreqDataSet::OnBnClickedOk)
+ 	ON_CBN_SELCHANGE(IDC_FILENAMECMBO, &CT3DFreqDataSet::OnCbnSelchangeFilenamecmbo)
+ 	ON_CBN_SELCHANGE(IDC_EXAMTYPECOMBO, &CT3DFreqDataSet::OnCbnSelchangeExamtypecombo)
+@@ -52,7 +52,8 @@
+ 
+ BOOL CT3DFreqDataSet::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
++	HSJStyleGraph(m_Graph);
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+@@ -374,7 +375,7 @@
+ 	m_Graph.Axes.Item("XAxis").SetMinMax(0,NiDt.GetSize());
+ 
+ }
+-BEGIN_EVENTSINK_MAP(CT3DFreqDataSet, CDialog)
++BEGIN_EVENTSINK_MAP(CT3DFreqDataSet, CHSJDialog)
+ 	ON_EVENT(CT3DFreqDataSet, IDC_CWGRAPH2, DISPID_DBLCLICK, CT3DFreqDataSet::DblClickCwgraph2, VTS_NONE)
+ END_EVENTSINK_MAP()
+ 
+--- first-page/T3DFreqDataSet.h
++++ all-pages/T3DFreqDataSet.h
+@@ -4,7 +4,7 @@
+ 
+ // CT3DFreqDataSet 对话框
+ 
+-class CT3DFreqDataSet : public CDialog
++class CT3DFreqDataSet : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CT3DFreqDataSet)
+ 
+--- first-page/ThrowLoadAna.cpp
++++ all-pages/ThrowLoadAna.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CThrowLoadAna 对话框
+ 
+-IMPLEMENT_DYNAMIC(CThrowLoadAna, CDialog)
++IMPLEMENT_DYNAMIC(CThrowLoadAna, CHSJDialog)
+ 
+ CThrowLoadAna::CThrowLoadAna(CWnd* pParent /*=NULL*/)
+-	: CDialog(CThrowLoadAna::IDD, pParent)
++	: CHSJDialog(CThrowLoadAna::IDD, pParent)
+ 	, m_baseTime(0)
+ 	, m_maxTime(0)
+ {
+@@ -25,7 +25,7 @@
+ 
+ void CThrowLoadAna::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Text(pDX, IDC_EDIT1, m_baseTime);
+ 	DDX_Control(pDX, IDC_CHECK1, m_graphChk);
+ 
+@@ -35,7 +35,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CThrowLoadAna, CDialog)
++BEGIN_MESSAGE_MAP(CThrowLoadAna, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CThrowLoadAna::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_CHECK1, &CThrowLoadAna::OnBnClickedCheck1)
+ 	ON_BN_CLICKED(IDCANCEL, &CThrowLoadAna::OnBnClickedCancel)
+@@ -77,7 +77,7 @@
+ 
+ BOOL CThrowLoadAna::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+ 	SetIcon(hIcon,   FALSE); //   Set   small   icon   
+--- first-page/ThrowLoadAna.h
++++ all-pages/ThrowLoadAna.h
+@@ -3,7 +3,7 @@
+ 
+ // CThrowLoadAna 对话框
+ 
+-class CThrowLoadAna : public CDialog
++class CThrowLoadAna : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CThrowLoadAna)
+ 
+--- first-page/ThrowLoadSetDlg.cpp
++++ all-pages/ThrowLoadSetDlg.cpp
+@@ -13,10 +13,10 @@
+ 
+ // CThrowLoadSetDlg 对话框
+ 
+-IMPLEMENT_DYNAMIC(CThrowLoadSetDlg, CDialog)
++IMPLEMENT_DYNAMIC(CThrowLoadSetDlg, CHSJDialog)
+ 
+ CThrowLoadSetDlg::CThrowLoadSetDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(CThrowLoadSetDlg::IDD, pParent)
++	: CHSJDialog(CThrowLoadSetDlg::IDD, pParent)
+ 	, m_width(50)
+ 	, m_increase(1)
+ {
+@@ -29,7 +29,7 @@
+ 
+ void CThrowLoadSetDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Text(pDX, IDC_EDIT1, m_width);
+ 	DDV_MinMaxDouble(pDX, m_width, 1, 10000);
+ 	//DDX_Text(pDX, IDC_EDIT2, m_increase);
+@@ -37,7 +37,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CThrowLoadSetDlg, CDialog)
++BEGIN_MESSAGE_MAP(CThrowLoadSetDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CThrowLoadSetDlg::OnBnClickedOk)
+ END_MESSAGE_MAP()
+ 
+--- first-page/ThrowLoadSetDlg.h
++++ all-pages/ThrowLoadSetDlg.h
+@@ -3,7 +3,7 @@
+ 
+ // CThrowLoadSetDlg 对话框
+ 
+-class CThrowLoadSetDlg : public CDialog
++class CThrowLoadSetDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CThrowLoadSetDlg)
+ 
+--- first-page/TrendGraphSet.cpp
++++ all-pages/TrendGraphSet.cpp
+@@ -8,11 +8,11 @@
+ 
+ // CTrendGraphSet 对话框
+ 
+-IMPLEMENT_DYNAMIC(CTrendGraphSet, CDialog)
++IMPLEMENT_DYNAMIC(CTrendGraphSet, CHSJDialog)
+ CTrendView* tv;
+ 
+ CTrendGraphSet::CTrendGraphSet(CWnd* pParent /*=NULL*/)
+-	: CDialog(CTrendGraphSet::IDD, pParent)
++	: CHSJDialog(CTrendGraphSet::IDD, pParent)
+ 	, title(_T(""))
+ 	, xMin(0)
+ 	, xMax(0)
+@@ -28,7 +28,7 @@
+ 
+ void CTrendGraphSet::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Text(pDX, IDC_EDIT1, title);
+ 
+ 	DDX_Text(pDX, IDC_EDIT2, xMin);
+@@ -43,7 +43,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CTrendGraphSet, CDialog)
++BEGIN_MESSAGE_MAP(CTrendGraphSet, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CTrendGraphSet::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER1, &CTrendGraphSet::OnBnClickedColorPicker1)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER2, &CTrendGraphSet::OnBnClickedColorPicker2)
+@@ -96,7 +96,7 @@
+ 
+ BOOL CTrendGraphSet::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/TrendGraphSet.h
++++ all-pages/TrendGraphSet.h
+@@ -3,7 +3,7 @@
+ 
+ // CTrendGraphSet 对话框
+ 
+-class CTrendGraphSet : public CDialog
++class CTrendGraphSet : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CTrendGraphSet)
+ 
+--- first-page/TrendSelSet.cpp
++++ all-pages/TrendSelSet.cpp
+@@ -10,10 +10,10 @@
+ // CTrendSelSet 对话框
+ 
+ using namespace std;
+-IMPLEMENT_DYNAMIC(CTrendSelSet, CDialog)
++IMPLEMENT_DYNAMIC(CTrendSelSet, CHSJDialog)
+ 
+ CTrendSelSet::CTrendSelSet(CWnd* pParent /*=NULL*/)
+-	: CDialog(CTrendSelSet::IDD, pParent),sel1(1),sel2(1),sel3(1),sel4(1),showType(0),m_fileType(3)
++	: CHSJDialog(CTrendSelSet::IDD, pParent),sel1(1),sel2(1),sel3(1),sel4(1),showType(0),m_fileType(3)
+ {
+ 	color1=RGB (255, 0, 0);
+ 	color2=RGB (0, 255, 0);
+@@ -27,7 +27,7 @@
+ 
+ void CTrendSelSet::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_FILENAMECMBO, fileNameComb);
+ 	DDX_Control(pDX, IDC_EXAMTYPECOMBO, examTypeComb);
+ 	DDX_Control(pDX, IDC_EXAMPARAMCOMBO, examParamComb);
+@@ -60,7 +60,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CTrendSelSet, CDialog)
++BEGIN_MESSAGE_MAP(CTrendSelSet, CHSJDialog)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER1, &CTrendSelSet::OnBnClickedColorPicker1)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER2, &CTrendSelSet::OnBnClickedColorPicker2)
+ 	ON_BN_CLICKED(IDC_COLOR_PICKER3, &CTrendSelSet::OnBnClickedColorPicker3)
+@@ -303,7 +303,7 @@
+ 
+ BOOL CTrendSelSet::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/TrendSelSet.h
++++ all-pages/TrendSelSet.h
+@@ -10,7 +10,7 @@
+ 	int isSel;
+ 	COLORREF colors;
+ };
+-class CTrendSelSet : public CDialog
++class CTrendSelSet : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CTrendSelSet)
+ 
+--- first-page/TrendView.cpp
++++ all-pages/TrendView.cpp
+@@ -85,6 +85,9 @@
+ void CTrendView::OnInitialUpdate()
+ {
+ 	CBCGPFormView::OnInitialUpdate();
++	HSJStyleChildControls(GetSafeHwnd(), m_skinFonts);
++	HSJStyleGraph(m_TrendGraph);
++
+ 	
+ 	/*--------------------------Marshall's Code2011.3.2 12:23--------------*/
+ 	//调整界面，不出现滚动条////Marshall  2011.3.2 12:23
+@@ -451,29 +454,8 @@
+ }
+ HBRUSH CTrendView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CBCGPFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-
+-	switch   (nCtlColor)   
+-	{
+-	case   CTLCOLOR_BTN:   
+-	case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-			//不加任何处理或设置背景为透明   
+-
+-		}   
+-	case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-	return(CBCGPFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));   
+-
++    if (HSJSetWhiteControlColor(pDC, pWnd, nCtlColor)) return HSJWhiteBrush();
++    return CBCGPFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ 
+ void CTrendView::OnTrendimagesave()
+--- first-page/TrendView.h
++++ all-pages/TrendView.h
+@@ -9,6 +9,8 @@
+ class CTrendView : public CBCGPFormView
+ {
+ 	DECLARE_DYNCREATE(CTrendView)
++	CHSJFontStore m_skinFonts; // Child typefaces only; original font sizes and bounds.
++
+ 
+ protected:
+ 	CTrendView();           // 动态创建所使用的受保护的构造函数
+--- first-page/WaveAnalysisTimeSpanSetDlg.cpp
++++ all-pages/WaveAnalysisTimeSpanSetDlg.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CWaveAnalysisTimeSpanSetDlg 对话框
+ 
+-IMPLEMENT_DYNAMIC(CWaveAnalysisTimeSpanSetDlg, CDialog)
++IMPLEMENT_DYNAMIC(CWaveAnalysisTimeSpanSetDlg, CHSJDialog)
+ 
+ CWaveAnalysisTimeSpanSetDlg::CWaveAnalysisTimeSpanSetDlg(CWnd* pParent /*=NULL*/)
+-	: CDialog(CWaveAnalysisTimeSpanSetDlg::IDD, pParent)
++	: CHSJDialog(CWaveAnalysisTimeSpanSetDlg::IDD, pParent)
+ 
+ 	, m_begin(0)
+ 	, m_end(0)
+@@ -25,7 +25,7 @@
+ 
+ void CWaveAnalysisTimeSpanSetDlg::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Text(pDX, IDC_BEGIN, m_begin);
+ 	DDV_MinMaxDouble(pDX, m_begin, 0.0, 1000000.0);
+ 	DDX_Text(pDX, IDC_END, m_end);
+@@ -33,7 +33,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CWaveAnalysisTimeSpanSetDlg, CDialog)
++BEGIN_MESSAGE_MAP(CWaveAnalysisTimeSpanSetDlg, CHSJDialog)
+ 	ON_BN_CLICKED(IDOK, &CWaveAnalysisTimeSpanSetDlg::OnBnClickedOk)
+ 	ON_BN_CLICKED(IDCANCEL, &CWaveAnalysisTimeSpanSetDlg::OnBnClickedCancel)
+ END_MESSAGE_MAP()
+--- first-page/WaveAnalysisTimeSpanSetDlg.h
++++ all-pages/WaveAnalysisTimeSpanSetDlg.h
+@@ -3,7 +3,7 @@
+ 
+ // CWaveAnalysisTimeSpanSetDlg 对话框
+ 
+-class CWaveAnalysisTimeSpanSetDlg : public CDialog
++class CWaveAnalysisTimeSpanSetDlg : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CWaveAnalysisTimeSpanSetDlg)
+ 
+--- first-page/WaveFilter.cpp
++++ all-pages/WaveFilter.cpp
+@@ -8,10 +8,10 @@
+ 
+ // CWaveFilter 对话框
+ 
+-IMPLEMENT_DYNAMIC(CWaveFilter, CDialog)
++IMPLEMENT_DYNAMIC(CWaveFilter, CHSJDialog)
+ 
+ CWaveFilter::CWaveFilter(CWnd* pParent /*=NULL*/)
+-	: CDialog(CWaveFilter::IDD, pParent)
++	: CHSJDialog(CWaveFilter::IDD, pParent)
+ 	, m_FreqLowCut(0)
+ 	, m_FreqHighCut(0)
+ 	, m_FilterType(0)
+@@ -27,7 +27,7 @@
+ 
+ void CWaveFilter::DoDataExchange(CDataExchange* pDX)
+ {
+-	CDialog::DoDataExchange(pDX);
++	CHSJDialog::DoDataExchange(pDX);
+ 	DDX_Control(pDX, IDC_COMBO1, m_filters);
+ 	DDX_Text(pDX,IDC_FreqLowCut,m_FreqLowCut);
+ 	DDX_Text(pDX,IDC_Freq,m_Freq);
+@@ -40,7 +40,7 @@
+ }
+ 
+ 
+-BEGIN_MESSAGE_MAP(CWaveFilter, CDialog)
++BEGIN_MESSAGE_MAP(CWaveFilter, CHSJDialog)
+ 	ON_CBN_SELCHANGE(IDC_COMBO1, &CWaveFilter::OnCbnSelchangeCombo1)
+ 	ON_BN_CLICKED(IDOK, &CWaveFilter::OnBnClickedOk)
+ END_MESSAGE_MAP()
+@@ -50,7 +50,7 @@
+ 
+ BOOL CWaveFilter::OnInitDialog()
+ {
+-	CDialog::OnInitDialog();
++	CHSJDialog::OnInitDialog();
+ 	//设置对话框图标
+ 	HICON   hIcon= AfxGetApp()->LoadIcon(IDI_DLG);   
+ 	SetIcon(hIcon,   TRUE); //   Set   big   icon   
+--- first-page/WaveFilter.h
++++ all-pages/WaveFilter.h
+@@ -4,7 +4,7 @@
+ 
+ // CWaveFilter 对话框
+ 
+-class CWaveFilter : public CDialog
++class CWaveFilter : public CHSJDialog
+ {
+ 	DECLARE_DYNAMIC(CWaveFilter)
+ 

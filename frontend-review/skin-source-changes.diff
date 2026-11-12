@@ -1,0 +1,372 @@
+--- before/CustomTreeCtrl.cpp
++++ after/CustomTreeCtrl.cpp
+@@ -1,6 +1,7 @@
+ #include "StdAfx.h"
+ #include <stdio.h>
+ #include "CustomTreeCtrl.h"
++#include "HSJAppearance.h"
+ #include "ScanAnalysisView.h"
+ #include "NiWaveFraqView.h"
+ #include "ChildFrm.h"
+@@ -23,6 +24,7 @@
+ {
+ }
+ BEGIN_MESSAGE_MAP(CCustomTreeCtrl, CTreeCtrl)
++	ON_NOTIFY_REFLECT(NM_CUSTOMDRAW, OnSkinCustomDraw)
+ 	ON_WM_LBUTTONDBLCLK()
+ 	ON_WM_RBUTTONDOWN()
+ END_MESSAGE_MAP()
+@@ -512,3 +514,20 @@
+ 
+ 
+ 
++
++// Drawing only; selection, keyboard navigation and item hit testing stay native.
++void CCustomTreeCtrl::OnSkinCustomDraw(NMHDR* header, LRESULT* result)
++{
++    NMTVCUSTOMDRAW* draw = reinterpret_cast<NMTVCUSTOMDRAW*>(header);
++    if (draw->nmcd.dwDrawStage == CDDS_PREPAINT) {
++        *result = CDRF_NOTIFYITEMDRAW;
++    } else if (draw->nmcd.dwDrawStage == CDDS_ITEMPREPAINT) {
++        const BOOL selected = (HTREEITEM)draw->nmcd.dwItemSpec == GetSelectedItem();
++        draw->clrText = selected ? HSJAccent() : HSJInk();
++        draw->clrTextBk = selected ? RGB(232, 241, 253) : RGB(255, 255, 255);
++        if (selected) draw->nmcd.uItemState &= ~(CDIS_SELECTED | CDIS_FOCUS);
++        *result = CDRF_DODEFAULT;
++    } else {
++        *result = CDRF_DODEFAULT;
++    }
++}
+--- before/CustomTreeCtrl.h
++++ after/CustomTreeCtrl.h
+@@ -15,6 +15,7 @@
+ 	CScanAnalysisDoc* pDoc;
+ public:
+ 	DECLARE_MESSAGE_MAP()
++	afx_msg void OnSkinCustomDraw(NMHDR* header, LRESULT* result);
+ public:
+ 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
+ public:
+--- before/MainFrm.cpp
++++ after/MainFrm.cpp
+@@ -7,6 +7,9 @@
+ #include "ScanSel/SysConf.h"
+ #include "ScanSel/StrTool.h"
+ #include "MainFrm.h"
++#include "HSJAppearance.h"
++
++IMPLEMENT_DYNCREATE(CHSJVisualManager, CBCGPVisualManagerXP)
+ #include "SaveImageBatDlg.h"
+ #include "ChildFrm.h"
+ #include "SaveDataDlg.h"
+@@ -55,6 +58,8 @@
+ 	ON_WM_CREATE()
+ 	ON_WM_CLOSE()
+ 	ON_COMMAND(ID_WINDOW_MANAGER, OnWindowManager)
++	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_MODERN, ID_VIEW_APPLOOK_MODERN, OnAppLook)
++	ON_UPDATE_COMMAND_UI_RANGE(ID_VIEW_APPLOOK_MODERN, ID_VIEW_APPLOOK_MODERN, OnUpdateAppLook)
+ 	//ON_COMMAND(ID_VIEW_CUSTOMIZE, OnViewCustomize)
+ 	//ON_REGISTERED_MESSAGE(BCGM_RESETTOOLBAR, OnToolbarReset)
+ 	ON_COMMAND_RANGE(ID_VIEW_APPLOOK_2000, ID_VIEW_APPLOOK_VS2008, OnAppLook)
+@@ -165,7 +170,7 @@
+ 	m_DynEqu=NULL;
+ 	m_Cam=NULL;
+ 	m_nTabLook=ID_TABGRAY;
+-	m_nAppLook = ID_VIEW_APPLOOK_XP;
++	m_nAppLook = ID_VIEW_APPLOOK_MODERN;
+ 	//m_nTabLook=	theApp.GetInt (_T("ApplicationLook"), ID_TABGRAY);
+ 	//m_nAppLook = theApp.GetInt (_T("ApplicationLook"), ID_VIEW_APPLOOK_VS2008);
+ 	// TODO: add member initialization code here
+@@ -187,6 +192,12 @@
+ 		return -1;
+ 
+ 	//this->m_bAutoMenuEnable=FALSE;
++	// Preserve the existing menu metrics while changing its typeface.
++	LOGFONT uiFont = {};
++	globalData.fontRegular.GetLogFont(&uiFont);
++	lstrcpyn(uiFont.lfFaceName, _T("Microsoft YaHei UI"), LF_FACESIZE);
++	uiFont.lfQuality = CLEARTYPE_QUALITY;
++	CBCGPMenuBar::SetMenuFont(&uiFont);
+ 	OnAppLook (m_nAppLook);
+ 	
+ 	//---------------------------------
+@@ -696,6 +707,10 @@
+ 
+ 	switch (m_nAppLook)
+ 	{
++	case ID_VIEW_APPLOOK_MODERN:
++		CBCGPVisualManager::SetDefaultManager(RUNTIME_CLASS(CHSJVisualManager));
++		break;
++
+ 	case ID_VIEW_APPLOOK_2000:
+ 		// enable Office 2000 look:
+ 		CBCGPVisualManager::SetDefaultManager (RUNTIME_CLASS (CBCGPVisualManager));
+--- before/niwavefraqview.cpp
++++ after/niwavefraqview.cpp
+@@ -7,6 +7,7 @@
+ #include "MainFrm.h"
+ #include "ScanAnalysisDoc.h"
+ #include "NiWaveFraqView.h"
++#include "HSJAppearance.h"
+ #include "CustomSaveDlg.h"
+ #include <atlimage.h>
+ #include <GdiPlus.h>
+@@ -224,6 +225,17 @@
+ 	//this->SetScrollSizes(MM_TEXT,CSize(0,0));//取消窗体滚动条
+ 
+ 	SetScrollSizes(MM_TEXT,CSize(0,0));
++	// Change the title typeface without changing its point size or window bounds.
++	CFont* titleFont = m_ctrlTitle.GetFont();
++	if (titleFont && !m_skinTitleFont.GetSafeHandle()) {
++		LOGFONT lf = {};
++		titleFont->GetLogFont(&lf);
++		lstrcpyn(lf.lfFaceName, _T("Microsoft YaHei UI"), LF_FACESIZE);
++		lf.lfQuality = CLEARTYPE_QUALITY;
++		if (m_skinTitleFont.CreateFontIndirect(&lf)) m_ctrlTitle.SetFont(&m_skinTitleFont);
++	}
++	HSJStyleGraph(m_Graph);
++	HSJStyleGraph(m_newGraph);
+ 	InitNiGraph();
+ 	ResizeParentToFit();
+ 	//GetWordVision();
+@@ -257,7 +269,7 @@
+ 	NiData.MinMax(minValue, minIndex, maxValue, maxIndex);
+ 	valueDecl=(maxValue-minValue)*0.1;
+ 	
+-	CNiColor blue(0,0,255);
++	CNiColor blue(40,104,197);
+ 	m_Graph.GetPlots().Add();
+ 	if (col!=NULL)
+ 		m_Graph.GetPlots().Item(1).LineColor=col;	
+@@ -467,7 +479,7 @@
+ if (isThrowload)
+ {
+   
+-   CNiColor blue(0,0,255);
++   CNiColor blue(40,104,197);
+    double m_1,m_2;
+    double m_baseX,m_baseY,m_maxminX,m_maxminY;
+    
+@@ -762,7 +774,7 @@
+ 	qVector.clear();
+ 
+ 	/*m_Graph.GetPlots().RemoveAll();*/
+-	CNiColor blue(0,0,255);
++	CNiColor blue(40,104,197);
+ 	/*m_Graph.GetPlots().Add();*/
+ 	if (col!=NULL)
+ 		m_Graph.GetPlots().Item(1).LineColor=col;	
+@@ -2062,30 +2074,13 @@
+ //消息：窗体底色
+ HBRUSH CNiWaveFraqView::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+ {
+-	HBRUSH hbr = CBCGPFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+-
+-	switch   (nCtlColor)   
+-	{
+-		case   CTLCOLOR_BTN:   
+-		case   CTLCOLOR_STATIC:   
+-		{  
+-			pDC->SetBkMode(TRANSPARENT);   
+-		//不加任何处理或设置背景为透明   
+-
+-		}   
+-		case   CTLCOLOR_DLG:   
+-		{   
+-			CBrush*   back_brush;   
+-			COLORREF   color;   
+-			color   =   (COLORREF)   GetSysColor(COLOR_3DHIGHLIGHT); //COLOR_BTNFACE  
+-			back_brush   =   new   CBrush(color);   
+-			return   (HBRUSH)   (back_brush->m_hObject);   
+-		}   
+-
+-	}   
+-	return(CBCGPFormView::OnCtlColor(pDC,   pWnd,   nCtlColor));   
+-
+-	//return hbr;
++    if (nCtlColor == CTLCOLOR_STATIC || nCtlColor == CTLCOLOR_DLG || nCtlColor == CTLCOLOR_BTN) {
++        pDC->SetTextColor(HSJInk());
++        pDC->SetBkColor(RGB(255, 255, 255));
++        pDC->SetBkMode(TRANSPARENT);
++        return HSJWhiteBrush();
++    }
++    return CBCGPFormView::OnCtlColor(pDC, pWnd, nCtlColor);
+ }
+ 
+ //波形图标注
+@@ -2098,7 +2093,7 @@
+ 
+ 	int xMin=ceil(m_Graph.Axes.Item("XAxis").GetMinimum()/m_deltaFreq);
+ 	
+-	CNiColor blue(0,0,255);	
++	CNiColor blue(40,104,197);	
+ 	m_Graph.GetPlots().Item(1).LineColor=blue;	
+ 	GetXRang();   //cxy
+ 
+@@ -2258,14 +2253,17 @@
+ 	//创造画笔对象
+ 	CWnd* pWndW=GetDlgItem(IDC_WAVE);
+ 	CDC* pDCW=pWndW->GetDC();
++	pDCW->SetTextColor(HSJInk());
++	pDCW->SetBkColor(RGB(255, 255, 255));
+ 	pWndW->Invalidate();
+ 	pWndW->UpdateWindow();
+ 
+ 	CPen* pPenGray=new CPen;
+-	pPenGray->CreatePen(PS_SOLID,1,RGB(192,192,192));	
++	pPenGray->CreatePen(PS_SOLID,1,HSJBorder());	
+ 	//CWnd* pWndF=GetDlgItem(IDC_FRAQ);////Marshall  2011.2.21 9:50
+ 	CWnd* pWndF=GetDlgItem(IDC_FRAQ);
+ 	CDC* pDCF=pWndF->GetDC();
++	pDCF->SetBkColor(RGB(255, 255, 255));
+ 	pWndF->Invalidate();
+ 	pWndF->UpdateWindow();	
+ 
+@@ -2305,7 +2303,7 @@
+ 	CNiFont font = m_Graph.Font;
+ 	CFont fnt;
+ 	//fnt.CreatePointFont(font.Size,font.Name);
+-	fnt.CreatePointFont(100,font.Name);
++	fnt.CreatePointFont(100,_T("Microsoft YaHei UI"));
+ 	//CFont *fnt = m_Graph.GetFont();
+ 	CFont *def_fnt = (CFont*)pDCW->SelectObject(&fnt);
+ 
+@@ -2318,7 +2316,7 @@
+ 		TCHAR str[50]; 	
+ 
+ 		//pDCW->SetTextColor(RGB(0,0,255));//更改颜色//Marshall  2011.2.21 9:9
+-		pDCW->SetTextColor(RGB(70,70,70));
++		pDCW->SetTextColor(HSJInk());
+ 
+ 		
+ 
+@@ -2388,7 +2386,7 @@
+ 		TCHAR str[50]; 	
+ 
+ 		//pDCW->SetTextColor(RGB(0,0,255));////Marshall  2011.2.21 9:12
+-		pDCW->SetTextColor(RGB(70,70,70));
++		pDCW->SetTextColor(HSJInk());
+ 
+ 		
+ 		sprintf(str,"起始时刻(秒)：%10.3f",waveParam.timeStart);
+@@ -2442,7 +2440,7 @@
+ 	{
+ 		//pDCF->SetTextColor(RGB(0,0,255));////Marshall  2011.2.21 9:13
+ 		CFont *old_fnt = (CFont*)pDCF->SelectObject(&fnt);////Marshall  2011.2.21 9:38
+-		pDCF->SetTextColor(RGB(70,70,70));
++		pDCF->SetTextColor(HSJInk());
+ 		//pDCF->TextOut(2,10,"序号  频率    幅值    相位");	////Marshall  2011.2.21 9:46
+ 		 pDCF->TextOut(2,10,"序号     频率        幅值");
+ 		for (int k=0;k<(int)fftVectorDesc.size();k++)
+@@ -3806,7 +3804,7 @@
+ 		frequencyData.MinMax(minValue, minIndex, maxValue, maxIndex);
+ 		valueDecl=(maxValue-minValue)*0.1;
+ 		/*m_newGraph.GetPlots().RemoveAll();*/
+-		CNiColor blue(0,0,255);
++		CNiColor blue(40,104,197);
+ 		/*m_newGraph.GetPlots().Add();*/
+ 		m_newGraph.Plots.Item(1).LineStyle = CNiPlot::LineNone;
+ 		m_newGraph.GetPlots().Item(1).LineColor=blue;			
+--- before/NiWaveFraqView.h
++++ after/NiWaveFraqView.h
+@@ -40,6 +40,7 @@
+ 
+ public:
+ 	enum{ IDD = IDD_NIWAVEFRAQ_FORM };
++	CFont m_skinTitleFont; // Owned for the lifetime of this view.
+ 
+ // 属性
+ public:
+--- before/OutputView.cpp
++++ after/OutputView.cpp
+@@ -2,6 +2,7 @@
+ #include "ScanAnalysis.h"
+ #include "MainFrm.h"
+ #include "OutputView.h"
++#include "HSJAppearance.h"
+ 
+ #ifdef _DEBUG
+ #define new DEBUG_NEW
+@@ -37,7 +38,9 @@
+ 	if (CBCGPDockingControlBar::OnCreate(lpCreateStruct) == -1)
+ 		return -1;
+ 
+-	m_Font.CreateStockObject (DEFAULT_GUI_FONT);
++	LOGFONT font = {};
++	HSJUIFont()->GetLogFont(&font);
++	m_Font.CreateFontIndirect(&font);
+ 
+ 	CRect rectClient (0, 0, lpCreateStruct->cx, lpCreateStruct->cy);
+ 
+@@ -128,7 +131,7 @@
+ 	ScreenToClient (rectTree);
+ 
+ 	rectTree.InflateRect (1, 1);
+-	dc.Draw3dRect (rectTree, ::GetSysColor (COLOR_3DSHADOW), ::GetSysColor (COLOR_3DSHADOW));
++	dc.Draw3dRect (rectTree, HSJBorder(), HSJBorder());
+ }
+ //处理上下文菜单
+ void COutputViewBar::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
+--- before/resource.h
++++ after/resource.h
+@@ -503,6 +503,7 @@
+ #define ID__CANCEL_ALL_ANNOTATION       33198
+ #define ID_ADJUST_ANNOTATION_PLACE      33199
+ #define ID_WINDOW_SET                   33200
++#define ID_VIEW_APPLOOK_MODERN           33201
+ #define ID_VIEW_WORKSPACE               42792
+ 
+ // Next default values for new objects
+@@ -510,7 +511,7 @@
+ #ifdef APSTUDIO_INVOKED
+ #ifndef APSTUDIO_READONLY_SYMBOLS
+ #define _APS_NEXT_RESOURCE_VALUE        274
+-#define _APS_NEXT_COMMAND_VALUE         33201
++#define _APS_NEXT_COMMAND_VALUE         33202
+ #define _APS_NEXT_CONTROL_VALUE         1203
+ #define _APS_NEXT_SYMED_VALUE           108
+ #endif
+--- before/ScanAnalysis.rc
++++ after/ScanAnalysis.rc
+@@ -311,6 +311,7 @@
+         MENUITEM SEPARATOR
+         POPUP "外观主题(&A)"
+         BEGIN
++            MENUITEM "浅色扁平（默认）",                  ID_VIEW_APPLOOK_MODERN
+             MENUITEM "Office &XP",                  ID_VIEW_APPLOOK_XP
+             MENUITEM "&Windows XP",                 ID_VIEW_APPLOOK_WIN_XP
+             MENUITEM "Office 200&3",                ID_VIEW_APPLOOK_2003
+--- before/WorkSpaceBar.cpp
++++ after/WorkSpaceBar.cpp
+@@ -4,6 +4,7 @@
+ #include "stdafx.h"
+ #include "ScanAnalysis.h"
+ #include "WorkSpaceBar.h"
++#include "HSJAppearance.h"
+ #include "ScanSel/SysConf.h"
+ #include "MainFrm.h"
+ #ifdef _DEBUG
+@@ -60,6 +61,13 @@
+ 		TRACE0("Failed to create workspace view\n");
+ 		return -1;      // fail to create
+ 	}
++
++	const int originalItemHeight = m_wndTree.GetItemHeight();
++	m_wndTree.SetFont(HSJUIFont());
++	m_wndTree.SetItemHeight(originalItemHeight);
++	m_wndTree.SetBkColor(RGB(255, 255, 255));
++	m_wndTree.SetTextColor(HSJInk());
++	m_wndTree.SetLineColor(HSJBorder());
+ 
+ 	// Setup trees content:
+ 	//HTREEITEM hRoot1 = m_wndTree.InsertItem (_T("Root 1"));
+@@ -98,8 +106,7 @@
+ 	ScreenToClient (rectTree);
+ 
+ 	rectTree.InflateRect (nBorderSize, nBorderSize);
+-	dc.Draw3dRect (rectTree,	::GetSysColor (COLOR_3DSHADOW), 
+-								::GetSysColor (COLOR_3DSHADOW));
++	dc.Draw3dRect (rectTree,	HSJBorder(), HSJBorder());
+ }
+ //通道名填充到数据操作目录树
+ void CWorkSpaceBar::FillTree(void)

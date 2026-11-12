@@ -1,0 +1,4 @@
+LIBRARY HSJLayout
+EXPORTS
+    LayoutView=_LayoutView@16
+    NormalizeFrame=_NormalizeFrame@4

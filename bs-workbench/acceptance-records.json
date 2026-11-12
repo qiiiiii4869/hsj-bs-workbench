@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "date": "2026-11-08",
+      "version": "0.6.1-annotation-drag",
+      "feature": "W-08",
+      "scope": "保存标注后可直接拖动文字框，无须先切换模式；锚点保持不变",
+      "status": "用户验收通过",
+      "user_statement": "验收完成，继续下一步吧",
+      "whole_feature_accepted": false,
+      "whole_application_accepted": false
+    }
+  ]
+}

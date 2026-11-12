@@ -1,0 +1,46 @@
+{
+  "patch": "2026-11-11-balanced-filter",
+  "created_at": "2026-11-11T16:46:12",
+  "scope": "Working-copy backend filter stability fix; original ZIP and package manifest unchanged",
+  "filter_engine": "balanced-butterworth-v1",
+  "files": [
+    {
+      "path": "C:\\Users\\admin\\Desktop\\HSJ-BS-Transfer-20261111-145431\\HSJ-BS-Transfer-20261111-145431\\bs-workbench\\analysis.py",
+      "bytes": 8766,
+      "sha256": "4451c510f7cdf6d31a9aa7f7468197f36e967edef105f71c740d75b86a8f3727",
+      "before_sha256": "8d30d8da3fd8ff09d6b1a729d4652f04895770c78d9962fad3a67cc00bc1406d"
+    },
+    {
+      "path": "C:\\Users\\admin\\Desktop\\HSJ-BS-Transfer-20261111-145431\\HSJ-BS-Transfer-20261111-145431\\bs-workbench\\specialty.py",
+      "bytes": 22844,
+      "sha256": "2a7967d622bf2b4158036a5a76cb5a5a88924d041ec386c2b662d3eebc40164d",
+      "before_sha256": "e44f4777f9ccb243dc0ab13c9902b57dc65088d8eef4b68a4f247cf84a9c63b4"
+    },
+    {
+      "path": "C:\\Users\\admin\\Desktop\\HSJ-BS-Transfer-20261111-145431\\HSJ-BS-Transfer-20261111-145431\\bs-workbench\\api.py",
+      "bytes": 19419,
+      "sha256": "2469ef330ab0ab765f60b207b7aaa3c7f44d02e6f9e4b0e12db4bbe6c41d5d41",
+      "before_sha256": "37bdb9179cda07922cd933f01869836c2c85589857998e273a06fbd49e230558"
+    },
+    {
+      "path": "C:\\Users\\admin\\Desktop\\HSJ-BS-Transfer-20261111-145431\\HSJ-BS-Transfer-20261111-145431\\bs-workbench\\stable_filter.py",
+      "bytes": 6667,
+      "sha256": "ca065d63e6fbb47bfecdc7d0034f0fa319766d79730534cc1c741bb37b274b2a",
+      "before_sha256": null
+    },
+    {
+      "path": "C:\\Users\\admin\\Desktop\\HSJ-BS-Transfer-20261111-145431\\HSJ-BS-Transfer-20261111-145431\\bs-workbench\\test_stable_filter.py",
+      "bytes": 3335,
+      "sha256": "ecf3ab68ba6faaad6e52d857a922faab36b4d8033bdff868a8059e5b4b886f2b",
+      "before_sha256": null
+    }
+  ],
+  "report": "C:\\Users\\admin\\Desktop\\测试系统程序\\outputs\\bs-filter-fix-20261111\\滤波修复验证报告.md",
+  "strict_equivalence_complete": false,
+  "existing_suite_issues": [
+    "test_all_real_samples_and_channels (test_workbench.CoreTests.test_all_real_samples_and_channels)",
+    "test_filtered_export_confidence_title_and_full_range (test_workbench.ApiTests.test_filtered_export_confidence_title_and_full_range)",
+    "test_real_analysis_and_exports (test_workbench.ApiTests.test_real_analysis_and_exports)",
+    "test_upload_roundtrip (test_workbench.ApiTests.test_upload_roundtrip)"
+  ]
+}

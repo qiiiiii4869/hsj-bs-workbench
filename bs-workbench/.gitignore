@@ -1,0 +1,8 @@
+.venv/
+.runtime/
+__pycache__/
+*.pyc
+data/exports/
+data/special-exports/
+native/*.obj
+native/*.log

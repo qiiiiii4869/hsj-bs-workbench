@@ -1,0 +1,11 @@
+# Generated local state; source, data, portable runtime and offline packages are retained.
+**/__pycache__/
+*.pyc
+*.pyo
+**/.venv/
+**/.runtime/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+Thumbs.db
+.DS_Store

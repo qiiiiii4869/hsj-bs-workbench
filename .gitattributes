@@ -1,0 +1,2 @@
+# Preserve the exact delivered bytes, including legacy Chinese source encodings.
+* -text
